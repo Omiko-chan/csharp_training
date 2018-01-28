@@ -24,7 +24,7 @@ namespace WebAddressbookTests
             options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox ESR\firefox.exe";
             driver = new FirefoxDriver(options);
             baseURL = "http://localhost/";
-            verificationErrors = new StringBuilder();
+            verificationErrors = new StringBuilder();     
         }
 
         [TearDown]
@@ -72,6 +72,7 @@ namespace WebAddressbookTests
 
         protected void Logout()
         {
+            driver.Manage().Timeouts().ImplicitWait = new TimeSpan(10);
             driver.FindElement(By.LinkText("Logout")).Click();
         }
         //CreateGroup
