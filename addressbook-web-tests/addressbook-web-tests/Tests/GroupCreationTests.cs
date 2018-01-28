@@ -7,24 +7,30 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupCreationTests: TestBase
+    public class GroupCreationTests : TestBase
     {
         [Test]
         public void GroupCreationTest()
         {
-            appManager.Navigator.GoToHomePage();
-            appManager.Auth.Login(new AccountData("admin", "secret"));
-            appManager.Navigator.GoToGroupsPage();
-            appManager.Group.InitGroupCreation();
             GroupData group = new GroupData("NameTestGroup")
             {
                 Header = "HeaderTestGroup",
                 Footer = "FooterTestGroup"
             };
-            appManager.Group.FillGroupForm(group);
-            appManager.Group.SubmitGroupCreation();
-            appManager.Group.ReturnToGroupsPage();
-            appManager.Auth.Logout();
+            appManager.Group.Create(group);
+
+
+        }
+
+        [Test]
+        public void EmptyGroupCreationTest()
+        {
+            GroupData group = new GroupData("")
+            {
+                Header = "",
+                Footer = ""
+            };
+            appManager.Group.Create(group);
         }
     }
 }
