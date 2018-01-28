@@ -12,17 +12,17 @@ namespace WebAddressbookTests
         [Test]
         public void ContactCreationTest()
         {
-            GoToHomePage();
-            Login(new AccountData("admin", "secret"));
-            InitContactCreation();
+            navigationHelper.GoToHomePage();
+            loginHelper.Login(new AccountData("admin", "secret"));
+            contactHelper.InitContactCreation();
             ContactData contact = new ContactData("Usernametest", "Usersurnametest");
             contact.BirthdayDay = "11";
             contact.BirthdayMonth = "May";
             contact.BirthdayYear = "1987";
-            FillContactForm(contact);
-            SubmitContactCreation();
-            ReturnToHomePage();
-            Logout();
+            contactHelper.FillContactForm(contact);
+            contactHelper.SubmitContactCreation();
+            contactHelper.ReturnToHomePage();
+            loginHelper.Logout();
         }
     }
 }
