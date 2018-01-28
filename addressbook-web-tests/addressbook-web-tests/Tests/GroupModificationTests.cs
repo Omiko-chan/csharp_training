@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 
 
-namespace WebAddressbookTests.Tests
+namespace WebAddressbookTests
 {
     [TestFixture]
     public class GroupModificationTests : TestBase

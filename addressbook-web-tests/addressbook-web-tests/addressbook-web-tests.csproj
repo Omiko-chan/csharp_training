@@ -65,6 +65,7 @@
     <Compile Include="AppManager\HelperBase.cs" />
     <Compile Include="AppManager\NavigationHelper.cs" />
     <Compile Include="AppManager\LoginHelper.cs" />
+    <Compile Include="Tests\ContactRemovalTests.cs" />
     <Compile Include="Tests\GroupModificationTests.cs" />
     <Compile Include="Tests\TestBase.cs" />
     <Compile Include="Tests\ContactCreationTests.cs" />
