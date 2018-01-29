@@ -27,6 +27,27 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper ModifyFromList(int p, ContactData newData)
+        {
+            manager.Navigator.GoToHomePage();
+            InitContactModificationFromList(p);
+            FillContactForm(newData);
+            SubmitContactModification();
+            manager.Navigator.GoToHomePage();
+            return this;
+        }
+
+        public ContactHelper ModifyFromDetails(int p, ContactData newData)
+        {
+            manager.Navigator.GoToHomePage();
+            BrowseContactDetail(p);
+            InitContactModificationFromDetail();
+            FillContactForm(newData);
+            SubmitContactModification();
+            manager.Navigator.GoToHomePage();
+            return this;
+        }
+
         public ContactHelper Remove(int p)
         {
             SelectContact(p);
@@ -57,6 +78,8 @@ namespace WebAddressbookTests
             new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(contact.BirthdayMonth);
             driver.FindElement(By.Name("byear")).Clear();
             driver.FindElement(By.Name("byear")).SendKeys(contact.BirthdayYear);
+            driver.FindElement(By.Name("work")).Clear();
+            driver.FindElement(By.Name("work")).SendKeys(contact.TelephoneWork);
             return this;
         }
 
@@ -76,6 +99,31 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.SwitchTo().Alert().Accept();
+            return this;
+        }
+        
+        private ContactHelper InitContactModificationFromList(int index)
+        {
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
+            return this;
+        }
+
+        private ContactHelper InitContactModificationFromDetail()
+        {
+            driver.FindElement(By.Name("modifiy")).Click(); 
+            return this;
+        }
+
+        private ContactHelper BrowseContactDetail(int index)
+
+        {
+            driver.FindElement(By.XPath("(//img[@alt='Details'])[" + index + "]")).Click();
+            return this;
+        }
+
+        private ContactHelper SubmitContactModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
             return this;
         }
 

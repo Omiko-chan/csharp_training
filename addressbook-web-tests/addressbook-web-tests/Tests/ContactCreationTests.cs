@@ -21,5 +21,17 @@ namespace WebAddressbookTests
             };
             appManager.Contact.Create(contact);
         }
+
+        [Test]
+        public void EmptyContactCreationTest()
+        {
+            appManager.Contact.InitContactCreation();
+            ContactData contact = new ContactData("", "")
+            {
+                BirthdayMonth = "-"
+            };
+            appManager.Contact.Create(contact);
+        }
+
     }
 }
