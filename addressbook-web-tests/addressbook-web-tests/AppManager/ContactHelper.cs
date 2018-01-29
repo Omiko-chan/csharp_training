@@ -30,10 +30,8 @@ namespace WebAddressbookTests
         public ContactHelper ModifyFromList(int p, ContactData newData)
         {
             manager.Navigator.GoToHomePage();
-            InitContactModificationFromList(p);
-            FillContactForm(newData);
-            SubmitContactModification();
-            manager.Navigator.GoToHomePage();
+            InitContactCardFromList(p);
+            Modify(newData);
             return this;
         }
 
@@ -41,19 +39,44 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToHomePage();
             BrowseContactDetail(p);
-            InitContactModificationFromDetail();
-            FillContactForm(newData);
-            SubmitContactModification();
+            InitContactCardFromDetail();
+            Modify(newData);
+            return this;
+        }
+
+        public ContactHelper RemoveFromList(int p)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectContact(p);
+            RemoveContactList();
             manager.Navigator.GoToHomePage();
             return this;
         }
 
-        public ContactHelper Remove(int p)
+        public ContactHelper RemoveFromCardEdit(int p)
         {
-            SelectContact(p);
-            RemoveContact();
+            manager.Navigator.GoToHomePage();
+            InitContactCardFromList(p);
+            RemoveContactCard();
             manager.Navigator.GoToHomePage();
             return this;
+        }
+
+        public ContactHelper RemoveFromCardDetails(int p)
+        {
+            manager.Navigator.GoToHomePage();
+            BrowseContactDetail(p);
+            InitContactCardFromDetail();
+            RemoveContactCard();
+            manager.Navigator.GoToHomePage();
+            return this;
+        }
+
+        private void Modify(ContactData newData)
+        {
+            FillContactForm(newData);
+            SubmitContactModification();
+            manager.Navigator.GoToHomePage();
         }
 
         public ContactHelper ReturnToHomePage()
@@ -95,20 +118,20 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper RemoveContact()
+        public ContactHelper RemoveContactList()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.SwitchTo().Alert().Accept();
             return this;
         }
         
-        private ContactHelper InitContactModificationFromList(int index)
+        private ContactHelper InitContactCardFromList(int index)
         {
             driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
             return this;
         }
 
-        private ContactHelper InitContactModificationFromDetail()
+        private ContactHelper InitContactCardFromDetail()
         {
             driver.FindElement(By.Name("modifiy")).Click(); 
             return this;
@@ -124,6 +147,12 @@ namespace WebAddressbookTests
         private ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        private ContactHelper RemoveContactCard()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             return this;
         }
 
