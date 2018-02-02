@@ -24,6 +24,19 @@ namespace WebAddressbookTests
         }
 
         [Test]
+        public void ContactModificationLastnameFromListTest()
+        {
+            ContactData newData = new ContactData(null, "Usersurnameonlymodif")
+            {
+                BirthdayDay = null,
+                BirthdayMonth = null,
+                BirthdayYear = null,
+                TelephoneWork = null
+            };
+            appManager.Contact.ModifyFromList(1, newData);
+        }
+
+        [Test]
         public void ContactModificationFromDetailsTest()
         {
             ContactData newData = new ContactData("Usernamemodif", "Usersurnamemodif")
@@ -32,6 +45,18 @@ namespace WebAddressbookTests
                 BirthdayMonth = "October",
                 BirthdayYear = "1998",
                 TelephoneWork = "(495)256-56-65"
+            };
+            appManager.Contact.ModifyFromDetails(1, newData);
+        }
+        [Test]
+        public void ContactModificationLastnameFromDetailsTest()
+        {
+            ContactData newData = new ContactData(null, "Usersurnameonlymodif")
+            {
+                BirthdayDay = null,
+                BirthdayMonth = null,
+                BirthdayYear = null,
+                TelephoneWork = null
             };
             appManager.Contact.ModifyFromDetails(1, newData);
         }

@@ -20,8 +20,14 @@ namespace WebAddressbookTests
         }
         public void GoToHomePage()
         {
+            driver.FindElement(By.LinkText("home")).Click();
+        }
+
+        public void GoToMainPage()
+        {
             driver.Navigate().GoToUrl(baseURL + "addressbook/");
         }
+
 
         public void GoToGroupsPage()
         {

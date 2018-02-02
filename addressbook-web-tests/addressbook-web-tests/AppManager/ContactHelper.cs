@@ -93,16 +93,18 @@ namespace WebAddressbookTests
 
         public ContactHelper FillContactForm(ContactData contact)
         {
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(contact.Lastname);
-            new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(contact.BirthdayDay);
-            new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(contact.BirthdayMonth);
-            driver.FindElement(By.Name("byear")).Clear();
-            driver.FindElement(By.Name("byear")).SendKeys(contact.BirthdayYear);
-            driver.FindElement(By.Name("work")).Clear();
-            driver.FindElement(By.Name("work")).SendKeys(contact.TelephoneWork);
+            Type(By.Name("firstname"), contact.Firstname);
+            Type(By.Name("lastname"), contact.Lastname);
+            if (contact.BirthdayDay != null)
+            {
+                new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(contact.BirthdayDay);
+            }
+            if (contact.BirthdayMonth != null)
+            {
+                new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(contact.BirthdayMonth);
+            }
+            Type(By.Name("byear"), contact.BirthdayYear);
+            Type(By.Name("work"), contact.TelephoneWork);
             return this;
         }
 
@@ -127,6 +129,7 @@ namespace WebAddressbookTests
         
         private ContactHelper InitContactCardFromList(int index)
         {
+            driver.Manage().Timeouts().ImplicitWait = new TimeSpan(20);
             driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
             return this;
         }
@@ -140,6 +143,7 @@ namespace WebAddressbookTests
         private ContactHelper BrowseContactDetail(int index)
 
         {
+            driver.Manage().Timeouts().ImplicitWait = new TimeSpan(20);
             driver.FindElement(By.XPath("(//img[@alt='Details'])[" + index + "]")).Click();
             return this;
         }

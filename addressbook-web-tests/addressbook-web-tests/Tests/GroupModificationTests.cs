@@ -22,6 +22,18 @@ namespace WebAddressbookTests
             };
             appManager.Group.Modify(1, newData);
         }
-    
-}
+
+        [Test]
+        public void GroupModificationNameTest()
+        {
+            GroupData newData = new GroupData("NameonlyModifGroup")
+            {
+                Header = null,
+                Footer = null
+            };
+            appManager.Group.Modify(1, newData);
+        }
+
+
+    }
 }
