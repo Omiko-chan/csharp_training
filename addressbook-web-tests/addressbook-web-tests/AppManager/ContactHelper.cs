@@ -29,46 +29,93 @@ namespace WebAddressbookTests
 
         public ContactHelper ModifyFromList(int p, ContactData newData)
         {
-            manager.Navigator.GoToHomePage();
-            InitContactCardFromList(p);
-            Modify(newData);
+            if (IsContactIn())
+            {
+                InitContactCardFromList(p);
+                Modify(newData);
+            }
+            else
+            {
+                Create(newData);
+                InitContactCardFromList(p);
+                Modify(newData);
+            }
             return this;
         }
 
         public ContactHelper ModifyFromDetails(int p, ContactData newData)
         {
-            manager.Navigator.GoToHomePage();
-            BrowseContactDetail(p);
-            InitContactCardFromDetail();
-            Modify(newData);
+            if (IsContactIn())
+            {
+                BrowseContactDetail(p);
+                InitContactCardFromDetail();
+                Modify(newData);
+            }
+            else
+            {
+                Create(newData);
+                BrowseContactDetail(p);
+                InitContactCardFromDetail();
+                Modify(newData);
+            }
+            return this;
+
+        }
+
+        public ContactHelper RemoveFromList(int p,ContactData contact)
+        {
+            if (IsContactIn())
+            {
+                SelectContact(p);
+                RemoveContactList();
+                manager.Navigator.GoToHomePage();
+            }
+            else
+            {
+                Create(contact);
+                SelectContact(p);
+                RemoveContactList();
+                manager.Navigator.GoToHomePage();
+            }
+            return this;
+
+        }
+
+        public ContactHelper RemoveFromCardEdit(int p, ContactData contact)
+        {
+            if (IsContactIn())
+            {
+                InitContactCardFromList(p);
+                RemoveContactCard();
+                manager.Navigator.GoToHomePage();
+            }
+            else
+            {
+                Create(contact);
+                InitContactCardFromList(p);
+                RemoveContactCard();
+                manager.Navigator.GoToHomePage();
+            }
             return this;
         }
 
-        public ContactHelper RemoveFromList(int p)
+        public ContactHelper RemoveFromCardDetails(int p,ContactData contact)
         {
-            manager.Navigator.GoToHomePage();
-            SelectContact(p);
-            RemoveContactList();
-            manager.Navigator.GoToHomePage();
-            return this;
-        }
-
-        public ContactHelper RemoveFromCardEdit(int p)
-        {
-            manager.Navigator.GoToHomePage();
-            InitContactCardFromList(p);
-            RemoveContactCard();
-            manager.Navigator.GoToHomePage();
-            return this;
-        }
-
-        public ContactHelper RemoveFromCardDetails(int p)
-        {
-            manager.Navigator.GoToHomePage();
-            BrowseContactDetail(p);
-            InitContactCardFromDetail();
-            RemoveContactCard();
-            manager.Navigator.GoToHomePage();
+            if (IsContactIn())
+            {
+                BrowseContactDetail(p);
+                InitContactCardFromDetail();
+                RemoveContactCard();
+                manager.Navigator.GoToHomePage();
+            }
+            else
+            {
+                Create(contact);
+                BrowseContactDetail(p);
+                InitContactCardFromDetail();
+                RemoveContactCard();
+                manager.Navigator.GoToHomePage();
+            }
             return this;
         }
 
@@ -158,6 +205,11 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             return this;
+        }
+        public bool IsContactIn()
+        {
+            manager.Navigator.GoToHomePage();
+            return IsElementPresent(By.Name("selected[]"));
         }
 
     }
