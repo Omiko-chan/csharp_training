@@ -29,93 +29,42 @@ namespace WebAddressbookTests
 
         public ContactHelper ModifyFromList(int p, ContactData newData)
         {
-            if (IsContactIn())
-            {
-                InitContactCardFromList(p);
-                Modify(newData);
-            }
-            else
-            {
-                Create(newData);
-                InitContactCardFromList(p);
-                Modify(newData);
-            }
+            InitContactCardFromList(p);
+            Modify(newData);
             return this;
         }
 
         public ContactHelper ModifyFromDetails(int p, ContactData newData)
         {
-            if (IsContactIn())
-            {
-                BrowseContactDetail(p);
-                InitContactCardFromDetail();
-                Modify(newData);
-            }
-            else
-            {
-                Create(newData);
-                BrowseContactDetail(p);
-                InitContactCardFromDetail();
-                Modify(newData);
-            }
+            BrowseContactDetail(p);
+            InitContactCardFromDetail();
+            Modify(newData);
             return this;
-
         }
 
         public ContactHelper RemoveFromList(int p,ContactData contact)
         {
-            if (IsContactIn())
-            {
                 SelectContact(p);
                 RemoveContactList();
                 manager.Navigator.GoToHomePage();
-            }
-            else
-            {
-                Create(contact);
-                SelectContact(p);
-                RemoveContactList();
-                manager.Navigator.GoToHomePage();
-            }
             return this;
 
         }
 
         public ContactHelper RemoveFromCardEdit(int p, ContactData contact)
         {
-            if (IsContactIn())
-            {
-                InitContactCardFromList(p);
-                RemoveContactCard();
-                manager.Navigator.GoToHomePage();
-            }
-            else
-            {
-                Create(contact);
-                InitContactCardFromList(p);
-                RemoveContactCard();
-                manager.Navigator.GoToHomePage();
-            }
+            InitContactCardFromList(p);
+            RemoveContactCard();
+            manager.Navigator.GoToHomePage();
             return this;
         }
 
         public ContactHelper RemoveFromCardDetails(int p,ContactData contact)
         {
-            if (IsContactIn())
-            {
-                BrowseContactDetail(p);
-                InitContactCardFromDetail();
-                RemoveContactCard();
-                manager.Navigator.GoToHomePage();
-            }
-            else
-            {
-                Create(contact);
-                BrowseContactDetail(p);
-                InitContactCardFromDetail();
-                RemoveContactCard();
-                manager.Navigator.GoToHomePage();
-            }
+            BrowseContactDetail(p);
+            InitContactCardFromDetail();
+            RemoveContactCard();
+            manager.Navigator.GoToHomePage();
             return this;
         }
 

@@ -11,7 +11,20 @@ namespace WebAddressbookTests
     [TestFixture]
     public class GroupModificationTests : AuthTestBase
     {
-    
+        [SetUp]
+        public void PreconditionsGroupModification()
+        {
+            GroupData groupData = new GroupData("NameGroup")
+            {
+                Header = "HeaderGroup",
+                Footer = "FooterGroup"
+            };
+            if (!appManager.Group.IsGroupIn())
+            {
+                appManager.Group.Create(groupData);
+            }
+        }
+
         [Test]
         public void GroupModificationTest()
         {
@@ -33,7 +46,5 @@ namespace WebAddressbookTests
             };
             appManager.Group.Modify(1, newData);
         }
-
-
     }
 }

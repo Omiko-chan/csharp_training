@@ -10,6 +10,21 @@ namespace WebAddressbookTests
     [TestFixture]
     public class ContactModificationTests : AuthTestBase
     {
+        [SetUp]
+        public void PreconditionsGroupModification()
+        {
+            ContactData contactData = new ContactData("Username", "Usersurname")
+            {
+                BirthdayDay = "15",
+                BirthdayMonth = "October",
+                BirthdayYear = "1998",
+                TelephoneWork = "(495)256-56-65"
+            };
+            if (!appManager.Contact.IsContactIn())
+            {
+                appManager.Contact.Create(contactData);
+            }
+        }
         [Test]
         public void ContactModificationFromListTest()
         {

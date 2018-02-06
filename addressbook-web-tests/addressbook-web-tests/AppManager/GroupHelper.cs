@@ -29,41 +29,20 @@ namespace WebAddressbookTests
 
         public GroupHelper Modify(int p, GroupData newData)
         {
-            if (IsGroupIn())
-            {
-                SelectGroup(p);
-                InitGroupModification();
-                FillGroupForm(newData);
-                SubmitGroupModification();
-                ReturnToGroupsPage();
-            }
-            else
-            {
-                Create(newData);
-                SelectGroup(p);
-                InitGroupModification();
-                FillGroupForm(newData);
-                SubmitGroupModification();
-                ReturnToGroupsPage();
-            }            
+            SelectGroup(p);
+            InitGroupModification();
+            FillGroupForm(newData);
+            SubmitGroupModification();
+            ReturnToGroupsPage();
             return this;
         }
 
-        public GroupHelper Remove(int p, GroupData group)
+        public GroupHelper Remove(int p)
         {
-            if (IsGroupIn())
-            {
-                SelectGroup(p);
-                RemoveGroup();
-                ReturnToGroupsPage();
-            }
-            else
-            {
-                Create(group);
-                SelectGroup(p);
-                RemoveGroup();
-                ReturnToGroupsPage();
-            }
+
+            SelectGroup(p);
+            RemoveGroup();
+            ReturnToGroupsPage();
             return this;
         }
         public GroupHelper FillGroupForm(GroupData group)
@@ -110,7 +89,7 @@ namespace WebAddressbookTests
             return this;
         }
 
-        private bool IsGroupIn()
+        public bool IsGroupIn()
         {
             manager.Navigator.GoToGroupsPage();
             return IsElementPresent(By.Name("selected[]"));

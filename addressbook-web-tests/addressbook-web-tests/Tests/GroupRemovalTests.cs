@@ -9,16 +9,23 @@ namespace WebAddressbookTests
     [TestFixture]
     public class GroupRemovalTests : AuthTestBase
     {
+        [SetUp]
+        public void PreconditionsGroupModification()
+        {
+            GroupData groupData = new GroupData("NameGroup")
+            {
+                Header = "HeaderGroup",
+                Footer = "FooterGroup"
+            };
+            if (!appManager.Group.IsGroupIn())
+            {
+                appManager.Group.Create(groupData);
+            }
+        }
         [Test]
         public void GroupRemovalTest()
         {
-            GroupData group = new GroupData("NameModifGroup")
-            {
-                Header = "HeaderModifGroup",
-                Footer = "FooterModifGroup"
-            };
-
-            appManager.Group.Remove(1, group);
+            appManager.Group.Remove(1);
         }
     }
 }
