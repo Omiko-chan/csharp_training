@@ -12,12 +12,12 @@ namespace WebAddressbookTests
         [Test]
         public void GroupCreationTest()
         {
-            GroupData group = new GroupData("NameTestGroup")
+            GroupData groupData = new GroupData("NameTestGroup")
             {
                 Header = "HeaderTestGroup",
                 Footer = "FooterTestGroup"
             };
-            appManager.Group.Create(group);
+            appManager.Group.Create(groupData);
 
 
         }
@@ -25,12 +25,12 @@ namespace WebAddressbookTests
         [Test]
         public void EmptyGroupCreationTest()
         {
-            GroupData group = new GroupData("")
+            GroupData groupData = new GroupData("")
             {
                 Header = "",
                 Footer = ""
             };
-            appManager.Group.Create(group);
+            appManager.Group.Create(groupData);
         }
     }
 }

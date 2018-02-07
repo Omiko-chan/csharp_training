@@ -75,6 +75,14 @@ namespace WebAddressbookTests
             manager.Navigator.GoToHomePage();
         }
 
+        public void PreconditionsContact(ContactData contact)
+        {
+            if (!IsContactIn())
+            {
+                Create(contact);
+            }
+        }
+
         public ContactHelper ReturnToHomePage()
         {
             driver.FindElement(By.LinkText("home page")).Click();

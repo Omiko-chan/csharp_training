@@ -10,6 +10,19 @@ namespace WebAddressbookTests
     [TestFixture]
     public class ContractRemovalTests : AuthTestBase
     {
+        [SetUp]
+        public void PreconditionsContactRemove()
+        {
+            ContactData contactData = new ContactData("Username", "Usersurname")
+            {
+                BirthdayDay = "22",
+                BirthdayMonth = "October",
+                BirthdayYear = "1990",
+                TelephoneWork = "(495)256-56-65"
+            };
+            appManager.Contact.PreconditionsContact(contactData);
+        }
+
         [Test]
         public void ContactRemovalListTest()
         {

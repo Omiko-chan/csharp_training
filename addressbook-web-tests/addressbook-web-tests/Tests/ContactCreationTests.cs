@@ -13,24 +13,24 @@ namespace WebAddressbookTests
         public void ContactCreationTest()
         {
             appManager.Contact.InitContactCreation();
-            ContactData contact = new ContactData("Usernametest", "Usersurnametest")
+            ContactData contactData = new ContactData("Usernametest", "Usersurnametest")
             {
                 BirthdayDay = "11",
                 BirthdayMonth = "May",
                 BirthdayYear = "1987"
             };
-            appManager.Contact.Create(contact);
+            appManager.Contact.Create(contactData);
         }
 
         [Test]
         public void EmptyContactCreationTest()
         {
             appManager.Contact.InitContactCreation();
-            ContactData contact = new ContactData("", "")
+            ContactData contactData = new ContactData("", "")
             {
                 BirthdayMonth = "-"
             };
-            appManager.Contact.Create(contact);
+            appManager.Contact.Create(contactData);
         }
 
     }

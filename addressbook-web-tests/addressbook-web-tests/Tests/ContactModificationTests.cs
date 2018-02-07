@@ -11,20 +11,18 @@ namespace WebAddressbookTests
     public class ContactModificationTests : AuthTestBase
     {
         [SetUp]
-        public void PreconditionsGroupModification()
+        public void PreconditionsContactModif()
         {
             ContactData contactData = new ContactData("Username", "Usersurname")
             {
-                BirthdayDay = "15",
+                BirthdayDay = "22",
                 BirthdayMonth = "October",
-                BirthdayYear = "1998",
+                BirthdayYear = "1990",
                 TelephoneWork = "(495)256-56-65"
             };
-            if (!appManager.Contact.IsContactIn())
-            {
-                appManager.Contact.Create(contactData);
-            }
+            appManager.Contact.PreconditionsContact(contactData);
         }
+        
         [Test]
         public void ContactModificationFromListTest()
         {

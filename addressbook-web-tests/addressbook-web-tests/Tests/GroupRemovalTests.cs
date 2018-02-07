@@ -17,10 +17,7 @@ namespace WebAddressbookTests
                 Header = "HeaderGroup",
                 Footer = "FooterGroup"
             };
-            if (!appManager.Group.IsGroupIn())
-            {
-                appManager.Group.Create(groupData);
-            }
+            appManager.Group.PreconditionsGroup(groupData);
         }
         [Test]
         public void GroupRemovalTest()

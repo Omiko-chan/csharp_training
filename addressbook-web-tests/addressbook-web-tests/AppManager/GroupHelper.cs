@@ -45,6 +45,15 @@ namespace WebAddressbookTests
             ReturnToGroupsPage();
             return this;
         }
+
+        public void PreconditionsGroup(GroupData group)
+        {
+            if (!IsGroupIn())
+            {
+                Create(group);
+            }
+        }
+
         public GroupHelper FillGroupForm(GroupData group)
         {
             Type(By.Name("group_name"), group.Name);
