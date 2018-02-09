@@ -33,7 +33,7 @@ namespace WebAddressbookTests
                 BirthdayYear = "1998",
                 TelephoneWork = "(495)256-56-65"
             };
-            appManager.Contact.ModifyFromList(1, newData);
+            appManager.Contact.ModifyFromList(0, newData);
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace WebAddressbookTests
                 BirthdayYear = null,
                 TelephoneWork = null
             };
-            appManager.Contact.ModifyFromList(1, newData);
+            appManager.Contact.ModifyFromList(0, newData);
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace WebAddressbookTests
                 BirthdayYear = "1998",
                 TelephoneWork = "(495)256-56-65"
             };
-            appManager.Contact.ModifyFromDetails(1, newData);
+            appManager.Contact.ModifyFromDetails(0, newData);
         }
         [Test]
         public void ContactModificationLastnameFromDetailsTest()
@@ -71,7 +71,7 @@ namespace WebAddressbookTests
                 BirthdayYear = null,
                 TelephoneWork = null
             };
-            appManager.Contact.ModifyFromDetails(1, newData);
+            appManager.Contact.ModifyFromDetails(0, newData);
         }
 
     }

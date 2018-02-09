@@ -30,7 +30,7 @@ namespace WebAddressbookTests
                 Header = "HeaderModifGroup",
                 Footer = "FooterModifGroup"
             };
-            appManager.Group.Modify(1, newData);
+            appManager.Group.Modify(0, newData);
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace WebAddressbookTests
                 Header = null,
                 Footer = null
             };
-            appManager.Group.Modify(1, newData);
+            appManager.Group.Modify(0, newData);
         }
     }
 }

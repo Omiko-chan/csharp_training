@@ -26,40 +26,33 @@ namespace WebAddressbookTests
         [Test]
         public void ContactRemovalListTest()
         {
-            ContactData contact = new ContactData("Username", "Usersurname")
-            {
-                BirthdayDay = "15",
-                BirthdayMonth = "October",
-                BirthdayYear = "1998",
-                TelephoneWork = "(495)256-56-65"
-            };
-            appManager.Contact.RemoveFromList(1, contact);
+            List<ContactData> oldContact = appManager.Contact.GetContactList();
+            appManager.Contact.RemoveFromList(0);
+            List<ContactData> newContact = appManager.Contact.GetContactList();
+            oldContact.RemoveAt(0);
+            Assert.AreEqual(oldContact, newContact);
         }
 
         [Test]
         public void ContactRemovalCardDetailsTest()
         {
-            ContactData contact = new ContactData("Username", "Usersurname")
-            {
-                BirthdayDay = "15",
-                BirthdayMonth = "October",
-                BirthdayYear = "1998",
-                TelephoneWork = "(495)256-56-65"
-            };
-            appManager.Contact.RemoveFromCardDetails(1, contact);
+            List<ContactData> oldContact = appManager.Contact.GetContactList();
+            appManager.Contact.RemoveFromCardDetails(0);
+            List<ContactData> newContact = appManager.Contact.GetContactList();
+            oldContact.RemoveAt(0);
+            Assert.AreEqual(oldContact, newContact);
+
         }
 
         [Test]
         public void ContactRemovalCardEditTest()
         {
-            ContactData contact = new ContactData("Username", "Usersurname")
-            {
-                BirthdayDay = "15",
-                BirthdayMonth = "October",
-                BirthdayYear = "1998",
-                TelephoneWork = "(495)256-56-65"
-            };
-            appManager.Contact.RemoveFromCardEdit(1, contact);
+            List<ContactData> oldContact = appManager.Contact.GetContactList();
+            appManager.Contact.RemoveFromCardEdit(0);
+            List<ContactData> newContact = appManager.Contact.GetContactList();
+            oldContact.RemoveAt(0);
+            Assert.AreEqual(oldContact, newContact);
+
         }
     }
 }

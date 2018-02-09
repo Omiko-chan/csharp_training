@@ -42,7 +42,7 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper RemoveFromList(int p,ContactData contact)
+        public ContactHelper RemoveFromList(int p)
         {
                 SelectContact(p);
                 RemoveContactList();
@@ -51,7 +51,7 @@ namespace WebAddressbookTests
 
         }
 
-        public ContactHelper RemoveFromCardEdit(int p, ContactData contact)
+        public ContactHelper RemoveFromCardEdit(int p)
         {
             InitContactCardFromList(p);
             RemoveContactCard();
@@ -59,7 +59,7 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper RemoveFromCardDetails(int p,ContactData contact)
+        public ContactHelper RemoveFromCardDetails(int p)
         {
             BrowseContactDetail(p);
             InitContactCardFromDetail();
@@ -120,7 +120,7 @@ namespace WebAddressbookTests
 
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
             return this;
         }
 
@@ -134,7 +134,7 @@ namespace WebAddressbookTests
         private ContactHelper InitContactCardFromList(int index)
         {
             driver.Manage().Timeouts().ImplicitWait = new TimeSpan(20);
-            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + (index + 1) + "]")).Click();
             return this;
         }
 
@@ -148,7 +148,7 @@ namespace WebAddressbookTests
 
         {
             driver.Manage().Timeouts().ImplicitWait = new TimeSpan(20);
-            driver.FindElement(By.XPath("(//img[@alt='Details'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Details'])[" + (index + 1) + "]")).Click();
             return this;
         }
 
@@ -169,5 +169,23 @@ namespace WebAddressbookTests
             return IsElementPresent(By.Name("selected[]"));
         }
 
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.GoToHomePage();
+            ICollection<IWebElement> elementsFName = driver.FindElements(By.CssSelector("#maintable td:nth-child(2)"));
+            ICollection<IWebElement> elementsLName = driver.FindElements(By.CssSelector("#maintable td:nth-child(3)"));
+
+            int limit = Math.Max(elementsFName.Count, elementsLName.Count);
+
+            for (int i = 0; i < limit; i++)
+            {
+                string fName = elementsFName.ElementAtOrDefault(i)?.Text;
+                string lName = elementsLName.ElementAtOrDefault(i)?.Text;
+
+                contacts.Add(new ContactData(fName,lName));
+            }
+            return contacts;
+        }
     }
 }

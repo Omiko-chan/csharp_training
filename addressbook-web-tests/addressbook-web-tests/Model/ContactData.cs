@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace WebAddressbookTests
 
 {
-    public class ContactData
+    public class ContactData : IEquatable<ContactData>
     {
-        private string firstname;
-        private string lastname;
+        private string _firstname;
+        private string _lastname;
         private string middlename = "";
         private string nickname = "";
         private string title = "";
@@ -37,29 +37,48 @@ namespace WebAddressbookTests
 
         public ContactData(string firstname, string lastname)
         {
-            this.firstname = firstname;
-            this.lastname = lastname;
+            this._firstname = firstname;
+            this._lastname = lastname;
         }
+
+        public bool Equals(ContactData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (Object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            return Firstname == other.Firstname && Lastname == other.Lastname;
+        }
+
+        public override int GetHashCode()
+        {
+            return (Firstname+Lastname).GetHashCode();
+        }
+
         public string Firstname
         {
             get
             {
-                return firstname;
+                return _firstname;
             }
             set
             {
-                firstname = value;
+                _firstname = value;
             }
         }
         public string Lastname
         {
             get
             {
-                return lastname;
+                return _lastname;
             }
             set
             {
-                lastname = value;
+                _lastname = value;
             }
         }
         public string Middlename
