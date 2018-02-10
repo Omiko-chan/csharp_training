@@ -27,7 +27,9 @@ namespace WebAddressbookTests
         public void ContactRemovalListTest()
         {
             List<ContactData> oldContact = appManager.Contact.GetContactList();
+
             appManager.Contact.RemoveFromList(0);
+
             List<ContactData> newContact = appManager.Contact.GetContactList();
             oldContact.RemoveAt(0);
             Assert.AreEqual(oldContact, newContact);
@@ -37,7 +39,9 @@ namespace WebAddressbookTests
         public void ContactRemovalCardDetailsTest()
         {
             List<ContactData> oldContact = appManager.Contact.GetContactList();
+
             appManager.Contact.RemoveFromCardDetails(0);
+
             List<ContactData> newContact = appManager.Contact.GetContactList();
             oldContact.RemoveAt(0);
             Assert.AreEqual(oldContact, newContact);
@@ -48,7 +52,9 @@ namespace WebAddressbookTests
         public void ContactRemovalCardEditTest()
         {
             List<ContactData> oldContact = appManager.Contact.GetContactList();
+
             appManager.Contact.RemoveFromCardEdit(0);
+
             List<ContactData> newContact = appManager.Contact.GetContactList();
             oldContact.RemoveAt(0);
             Assert.AreEqual(oldContact, newContact);

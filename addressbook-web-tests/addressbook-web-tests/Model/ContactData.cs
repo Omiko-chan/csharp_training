@@ -7,38 +7,39 @@ using System.Threading.Tasks;
 namespace WebAddressbookTests
 
 {
-    public class ContactData : IEquatable<ContactData>
+    public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private string _firstname;
         private string _lastname;
-        private string middlename = "";
-        private string nickname = "";
-        private string title = "";
-        private string company = "";
-        private string address = "";
-        private string telephoneHome = "";
-        private string telephoneMobile = "";
-        private string telephoneWork = "";
-        private string telephoneFax = "";
-        private string email = "";
-        private string email2 = "";
-        private string email3 = "";
-        private string homepage = "";
-        private string birthdayDay = "";
-        private string birthdayMonth = "";
-        private string birthdayYear = "";
-        private string anniversaryDay = "";
-        private string anniversaryMonth = "";
-        private string anniversaryYear = "";
-        private string new_group = "";
-        private string address2 = "";
-        private string phone2 = "";
-        private string notes = "";
+        private string _middlename = "";
+        private string _nickname = "";
+        private string _title = "";
+        private string _company = "";
+        private string _address = "";
+        private string _telephoneHome = "";
+        private string _telephoneMobile = "";
+        private string _telephoneWork = "";
+        private string _telephoneFax = "";
+        private string _email = "";
+        private string _email2 = "";
+        private string _email3 = "";
+        private string _homepage = "";
+        private string _birthdayDay = "";
+        private string _birthdayMonth = "";
+        private string _birthdayYear = "";
+        private string _anniversaryDay = "";
+        private string _anniversaryMonth = "";
+        private string _anniversaryYear = "";
+        private string _new_group = "";
+        private string _address2 = "";
+        private string _phone2 = "";
+        private string _notes = "";
 
-        public ContactData(string firstname, string lastname)
+        public ContactData(string lastname, string firstname)
         {
-            this._firstname = firstname;
-            this._lastname = lastname;
+            _lastname = lastname;
+            _firstname = firstname;
+
         }
 
         public bool Equals(ContactData other)
@@ -56,7 +57,21 @@ namespace WebAddressbookTests
 
         public override int GetHashCode()
         {
-            return (Firstname+Lastname).GetHashCode();
+            return (Lastname+Firstname).GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return "lName=" + Lastname + " fName=" + Firstname; 
+        }
+
+        public int CompareTo(ContactData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return 1;
+            }
+            return (Lastname + Firstname).CompareTo(other.Lastname + other.Firstname);
         }
 
         public string Firstname
@@ -85,253 +100,253 @@ namespace WebAddressbookTests
         {
             get
             {
-                return middlename;
+                return _middlename;
             }
             set
             {
-                middlename = value;
+                _middlename = value;
             }
         }
         public string NickName
         {
             get
             {
-                return nickname;
+                return _nickname;
             }
             set
             {
-                nickname = value;
+                _nickname = value;
             }
         }
         public string Title
         {
             get
             {
-                return title;
+                return _title;
             }
             set
             {
-                title = value;
+                _title = value;
             }
         }
         public string Company
         {
             get
             {
-                return company;
+                return _company;
             }
             set
             {
-                company = value;
+                _company = value;
             }
         }
         public string Address
         {
             get
             {
-                return address;
+                return _address;
             }
             set
             {
-                address = value;
+                _address = value;
             }
         }
         public string TelephoneHome
         {
             get
             {
-                return telephoneHome;
+                return _telephoneHome;
             }
             set
             {
-                telephoneHome = value;
+                _telephoneHome = value;
             }
         }
         public string TelephoneMobile
         {
             get
             {
-                return telephoneMobile;
+                return _telephoneMobile;
             }
             set
             {
-                telephoneMobile = value;
+                _telephoneMobile = value;
             }
         }
         public string TelephoneWork
         {
             get
             {
-                return telephoneWork;
+                return _telephoneWork;
             }
             set
             {
-                telephoneWork = value;
+                _telephoneWork = value;
             }
         }
         public string TelephoneFax
         {
             get
             {
-                return telephoneFax;
+                return _telephoneFax;
             }
             set
             {
-                telephoneFax = value;
+                _telephoneFax = value;
             }
         }
         public string Email
         {
             get
             {
-                return email;
+                return _email;
             }
             set
             {
-                email = value;
+                _email = value;
             }
         }
         public string Email2
         {
             get
             {
-                return email2;
+                return _email2;
             }
             set
             {
-                email2 = value;
+                _email2 = value;
             }
         }
         public string Email3
         {
             get
             {
-                return email3;
+                return _email3;
             }
             set
             {
-                email3 = value;
+                _email3 = value;
             }
         }
         public string Homepage
         {
             get
             {
-                return homepage;
+                return _homepage;
             }
             set
             {
-                homepage = value;
+                _homepage = value;
             }
         }
         public string BirthdayDay
         {
             get
             {
-                return birthdayDay;
+                return _birthdayDay;
             }
             set
             {
-                birthdayDay = value;
+                _birthdayDay = value;
             }
         }
         public string BirthdayMonth
         {
             get
             {
-                return birthdayMonth;
+                return _birthdayMonth;
             }
             set
             {
-                birthdayMonth = value;
+                _birthdayMonth = value;
             }
         }
         public string BirthdayYear
         {
             get
             {
-                return birthdayYear;
+                return _birthdayYear;
             }
             set
             {
-                birthdayYear = value;
+                _birthdayYear = value;
             }
         }
         public string AnniversaryDay
         {
             get
             {
-                return anniversaryDay;
+                return _anniversaryDay;
             }
             set
             {
-                anniversaryDay = value;
+                _anniversaryDay = value;
             }
         }
         public string AnniversaryMonth
         {
             get
             {
-                return anniversaryMonth;
+                return _anniversaryMonth;
             }
             set
             {
-                anniversaryMonth = value;
+                _anniversaryMonth = value;
             }
         }
         public string AnniversaryYear
         {
             get
             {
-                return anniversaryYear;
+                return _anniversaryYear;
             }
             set
             {
-                anniversaryYear = value;
+                _anniversaryYear = value;
             }
         }
         public string NewGroup
         {
             get
             {
-                return new_group;
+                return _new_group;
             }
             set
             {
-                new_group = value;
+                _new_group = value;
             }
         }
         public string Address2
         {
             get
             {
-                return address2;
+                return _address2;
             }
             set
             {
-                address2 = value;
+                _address2 = value;
             }
         }
         public string Phone2
         {
             get
             {
-                return phone2;
+                return _phone2;
             }
             set
             {
-                phone2 = value;
+                _phone2 = value;
             }
         }
         public string Notes
         {
             get
             {
-                return notes;
+                return _notes;
             }
             set
             {
-                notes = value;
+                _notes = value;
             }
         }
     }
