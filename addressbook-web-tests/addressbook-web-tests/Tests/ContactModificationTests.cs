@@ -38,6 +38,8 @@ namespace WebAddressbookTests
 
             appManager.Contact.ModifyFromList(0, newData);
 
+            Assert.AreEqual(oldContact.Count, appManager.Contact.GetContactList().Count);
+
             List<ContactData> newContact = appManager.Contact.GetContactList();
             oldContact[0].Lastname = newData.Lastname;
             oldContact[0].Firstname = newData.Firstname;
@@ -61,6 +63,8 @@ namespace WebAddressbookTests
 
             appManager.Contact.ModifyFromList(0, newData);
 
+            Assert.AreEqual(oldContact.Count, appManager.Contact.GetContactList().Count);
+
             List<ContactData> newContact = appManager.Contact.GetContactList();
             oldContact[0].Lastname = newData.Lastname;
             oldContact.Sort();
@@ -83,6 +87,8 @@ namespace WebAddressbookTests
 
             appManager.Contact.ModifyFromDetails(0, newData);
 
+            Assert.AreEqual(oldContact.Count, appManager.Contact.GetContactList().Count);
+
             List<ContactData> newContact = appManager.Contact.GetContactList();
             oldContact[0].Lastname = newData.Lastname;
             oldContact[0].Firstname = newData.Firstname;
@@ -104,6 +110,8 @@ namespace WebAddressbookTests
             List<ContactData> oldContact = appManager.Contact.GetContactList();
 
             appManager.Contact.ModifyFromDetails(0, newData);
+
+            Assert.AreEqual(oldContact.Count, appManager.Contact.GetContactList().Count);
 
             List<ContactData> newContact = appManager.Contact.GetContactList();
             oldContact[0].Lastname = newData.Lastname;

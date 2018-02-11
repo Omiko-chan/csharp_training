@@ -30,6 +30,8 @@ namespace WebAddressbookTests
 
             appManager.Contact.RemoveFromList(0);
 
+            Assert.AreEqual(oldContact.Count - 1, appManager.Contact.GetContactList().Count);
+
             List<ContactData> newContact = appManager.Contact.GetContactList();
             oldContact.RemoveAt(0);
             Assert.AreEqual(oldContact, newContact);
@@ -41,6 +43,8 @@ namespace WebAddressbookTests
             List<ContactData> oldContact = appManager.Contact.GetContactList();
 
             appManager.Contact.RemoveFromCardDetails(0);
+
+            Assert.AreEqual(oldContact.Count - 1, appManager.Contact.GetContactList().Count);
 
             List<ContactData> newContact = appManager.Contact.GetContactList();
             oldContact.RemoveAt(0);
@@ -54,6 +58,8 @@ namespace WebAddressbookTests
             List<ContactData> oldContact = appManager.Contact.GetContactList();
 
             appManager.Contact.RemoveFromCardEdit(0);
+
+            Assert.AreEqual(oldContact.Count - 1, appManager.Contact.GetContactList().Count);
 
             List<ContactData> newContact = appManager.Contact.GetContactList();
             oldContact.RemoveAt(0);

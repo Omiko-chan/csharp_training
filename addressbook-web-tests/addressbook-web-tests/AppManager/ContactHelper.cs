@@ -115,6 +115,7 @@ namespace WebAddressbookTests
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            contactCache = null;
             return this;
         }
 
@@ -127,6 +128,7 @@ namespace WebAddressbookTests
         public ContactHelper RemoveContactList()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            contactCache = null;
             driver.SwitchTo().Alert().Accept();
             return this;
         }
@@ -155,12 +157,14 @@ namespace WebAddressbookTests
         private ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            contactCache = null;
             return this;
         }
 
         private ContactHelper RemoveContactCard()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            contactCache = null;
             return this;
         }
         public bool IsContactIn()
@@ -169,23 +173,33 @@ namespace WebAddressbookTests
             return IsElementPresent(By.Name("selected[]"));
         }
 
+        private List<ContactData> contactCache = null;
+
         public List<ContactData> GetContactList()
         {
-            List<ContactData> contacts = new List<ContactData>();
-            manager.Navigator.GoToHomePage();
-            ICollection<IWebElement> elementsFName = driver.FindElements(By.CssSelector("#maintable td:nth-child(2)"));
-            ICollection<IWebElement> elementsLName = driver.FindElements(By.CssSelector("#maintable td:nth-child(3)"));
-
-            int limit = Math.Max(elementsFName.Count, elementsLName.Count);
-
-            for (int i = 0; i < limit; i++)
+            if (contactCache == null)
             {
-                string fName = elementsFName.ElementAtOrDefault(i)?.Text;
-                string lName = elementsLName.ElementAtOrDefault(i)?.Text;
+                contactCache = new List<ContactData>();
+                manager.Navigator.GoToHomePage();
+                ICollection<IWebElement> elementsFName = driver.FindElements(By.CssSelector("#maintable td:nth-child(2)"));
+                ICollection<IWebElement> elementsLName = driver.FindElements(By.CssSelector("#maintable td:nth-child(3)"));
+                ICollection<IWebElement> elementsId = driver.FindElements(By.CssSelector("#maintable td:nth-child(1)"));
 
-                contacts.Add(new ContactData(fName,lName));
+                int limit = Math.Max(elementsFName.Count, elementsLName.Count);
+
+                for (int i = 0; i < limit; i++)
+                {
+                    string fName = elementsFName.ElementAtOrDefault(i)?.Text;
+                    string lName = elementsLName.ElementAtOrDefault(i)?.Text;
+
+                    contactCache.Add(new ContactData(fName, lName)
+                    {
+                        Id = elementsId.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
+                }
             }
-            return contacts;
+
+            return new List<ContactData>(contactCache);
         }
     }
 }
