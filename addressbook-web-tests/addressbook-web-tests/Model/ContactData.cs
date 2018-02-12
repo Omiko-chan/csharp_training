@@ -47,7 +47,7 @@ namespace WebAddressbookTests
             }
             return (Lastname + Firstname).CompareTo(other.Lastname + other.Firstname);
         }
-
+        public string Id { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }        
         public string Middlename { get; set; }     
@@ -73,7 +73,6 @@ namespace WebAddressbookTests
         public string Address2 { get; set; }
         public string Phone2 { get; set; }
         public string Notes { get; set; }        
-        public string Id { get; set; }
     }
     
 

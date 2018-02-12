@@ -13,7 +13,7 @@ namespace WebAddressbookTests
         [Test]
         public void ContactCreationTest()
         {
-            appManager.Contact.InitContactCreation();
+ //           appManager.Contact.InitContactCreation();
             ContactData contactData = new ContactData("Usersurnametest", "Usernametest" )
             {
                 BirthdayDay = "11",
@@ -36,7 +36,7 @@ namespace WebAddressbookTests
         [Test]
         public void EmptyContactCreationTest()
         {
-            appManager.Contact.InitContactCreation();
+ //           appManager.Contact.InitContactCreation();
             ContactData contactData = new ContactData("", "")
             {
                 BirthdayMonth = "-"

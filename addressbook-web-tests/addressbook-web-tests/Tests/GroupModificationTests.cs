@@ -31,7 +31,7 @@ namespace WebAddressbookTests
                 Footer = "FooterModifGroup"
             };
             List<GroupData> oldGroups = appManager.Group.GetGroupList();
-
+            GroupData oldData = oldGroups[0];
             appManager.Group.Modify(0, newData);
 
             Assert.AreEqual(oldGroups.Count, appManager.Group.GetGroupList().Count);
@@ -41,6 +41,13 @@ namespace WebAddressbookTests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
+            foreach (GroupData group in newGroups)
+            {
+                if (group.Id == oldData.Id)
+                {
+                    Assert.AreEqual(newData.Name, group.Name);
+                }
+            }
 
         }
 

@@ -185,7 +185,10 @@ namespace WebAddressbookTests
 
                 foreach (IWebElement element in elements)
                 {
-                    contactCache.Add(new ContactData(element.FindElement(By.CssSelector("td:nth-child(2)")).Text, element.FindElement(By.CssSelector("td:nth-child(3)")).Text));
+                    contactCache.Add(new ContactData(element.FindElement(By.CssSelector("td:nth-child(2)")).Text, 
+                                                     element.FindElement(By.CssSelector("td:nth-child(3)")).Text){
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
                     
                 }
             }
