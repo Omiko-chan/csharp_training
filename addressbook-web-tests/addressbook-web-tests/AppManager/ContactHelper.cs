@@ -181,25 +181,17 @@ namespace WebAddressbookTests
             {
                 contactCache = new List<ContactData>();
                 manager.Navigator.GoToHomePage();
-                ICollection<IWebElement> elementsFName = driver.FindElements(By.CssSelector("#maintable td:nth-child(2)"));
-                ICollection<IWebElement> elementsLName = driver.FindElements(By.CssSelector("#maintable td:nth-child(3)"));
-                ICollection<IWebElement> elementsId = driver.FindElements(By.CssSelector("#maintable td:nth-child(1)"));
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name='entry']"));
 
-                int limit = Math.Max(elementsFName.Count, elementsLName.Count);
-
-                for (int i = 0; i < limit; i++)
+                foreach (IWebElement element in elements)
                 {
-                    string fName = elementsFName.ElementAtOrDefault(i)?.Text;
-                    string lName = elementsLName.ElementAtOrDefault(i)?.Text;
-
-                    contactCache.Add(new ContactData(fName, lName)
-                    {
-                        Id = elementsId.FindElement(By.TagName("input")).GetAttribute("value")
-                    });
+                    contactCache.Add(new ContactData(element.FindElement(By.CssSelector("td:nth-child(2)")).Text, element.FindElement(By.CssSelector("td:nth-child(3)")).Text));
+                    
                 }
             }
 
             return new List<ContactData>(contactCache);
         }
+
     }
 }
