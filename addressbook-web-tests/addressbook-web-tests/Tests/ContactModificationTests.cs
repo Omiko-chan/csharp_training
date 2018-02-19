@@ -18,7 +18,7 @@ namespace WebAddressbookTests
                 BirthdayDay = "22",
                 BirthdayMonth = "October",
                 BirthdayYear = "1990",
-                TelephoneWork = "(495)256-56-65"
+                PhoneWork = "(495)256-56-65"
             };
             appManager.Contact.PreconditionsContact(contactData);
         }
@@ -31,7 +31,7 @@ namespace WebAddressbookTests
                 BirthdayDay = "15",
                 BirthdayMonth = "October",
                 BirthdayYear = "1998",
-                TelephoneWork = "(495)256-56-65"
+                PhoneWork = "(495)256-56-65"
             };
 
             List<ContactData> oldContact = appManager.Contact.GetContactList();
@@ -64,7 +64,7 @@ namespace WebAddressbookTests
                 BirthdayDay = null,
                 BirthdayMonth = null,
                 BirthdayYear = null,
-                TelephoneWork = null
+                PhoneWork = null
             };
 
             List<ContactData> oldContact = appManager.Contact.GetContactList();
@@ -97,7 +97,7 @@ namespace WebAddressbookTests
                 BirthdayDay = "15",
                 BirthdayMonth = "October",
                 BirthdayYear = "1998",
-                TelephoneWork = "(495)256-56-65"
+                PhoneWork = "(495)256-56-65"
             };
 
             List<ContactData> oldContact = appManager.Contact.GetContactList();
@@ -130,7 +130,7 @@ namespace WebAddressbookTests
                 BirthdayDay = null,
                 BirthdayMonth = null,
                 BirthdayYear = null,
-                TelephoneWork = null
+                PhoneWork = null
             };
 
             List<ContactData> oldContact = appManager.Contact.GetContactList();

@@ -18,7 +18,7 @@ namespace WebAddressbookTests
                 BirthdayDay = "22",
                 BirthdayMonth = "October",
                 BirthdayYear = "1990",
-                TelephoneWork = "(495)256-56-65"
+                PhoneWork = "(495)256-56-65"
             };
             appManager.Contact.PreconditionsContact(contactData);
         }

@@ -9,6 +9,9 @@ namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
+        private string allPhones;
+        private string allEmails;
+
         public ContactData(string lastname, string firstname)
         {
             Lastname = lastname;
@@ -55,9 +58,9 @@ namespace WebAddressbookTests
         public string Title { get; set; }
         public string Company { get; set; }
         public string Address { get; set; }
-        public string TelephoneHome { get; set; }
-        public string TelephoneMobile { get; set; }
-        public string TelephoneWork { get; set; }
+        public string PhoneHome { get; set; }
+        public string PhoneMobile { get; set; }
+        public string PhoneWork { get; set; }
         public string TelephoneFax { get; set; }
         public string Email { get; set; }
         public string Email2 { get; set; }
@@ -72,8 +75,60 @@ namespace WebAddressbookTests
         public string NewGroup { get; set; }
         public string Address2 { get; set; }
         public string Phone2 { get; set; }
-        public string Notes { get; set; }        
-    }
-    
+        public string Notes { get; set; }
+        public string AllPhones
+        {
+            get
+            {
+                if (allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return (CleanUpPhone(PhoneHome) + CleanUpPhone(PhoneMobile) + CleanUpPhone(PhoneWork)).Trim();
+                }
+            }
+            set
+            {
+                allPhones = value;
+            }
+        }
+        public string AllEmails
+        {
+            get
+            {
+                if (allEmails != null)
+                {
+                    return allEmails;
+                }
+                else
+                {
+                    return (CleanUpEmail(Email) + CleanUpEmail(Email2) + CleanUpEmail(Email3)).Trim();
+                }
+            }
+            set
+            {
+                allEmails = value;
+            }
+        }
 
+        private string CleanUpEmail(string email)
+        {
+            if (email == null || email == "")
+            {
+                return "";
+            }
+            return email.Trim() + "\r\n";
+        }
+
+        private string CleanUpPhone(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
+        }
+    }
 }
