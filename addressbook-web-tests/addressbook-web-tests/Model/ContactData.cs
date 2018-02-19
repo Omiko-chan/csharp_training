@@ -51,6 +51,24 @@ namespace WebAddressbookTests
             }
             return (Lastname + Firstname).CompareTo(other.Lastname + other.Firstname);
         }
+
+        private string CleanUpEmail(string email)
+        {
+            if (email == null || email == "")
+            {
+                return "";
+            }
+            return email.Trim() + "\r\n";
+        }
+
+        private string CleanUpPhone(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            return Regex.Replace(phone, "[ ()-]", "") + "\r\n";
+        }
         public string Id { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }        
@@ -75,7 +93,7 @@ namespace WebAddressbookTests
         public string AnniversaryYear { get; set; }
         public string NewGroup { get; set; }
         public string Address2 { get; set; }
-        public string Phone2 { get; set; }
+        public string PhoneHome2 { get; set; }
         public string Notes { get; set; }
         public string AllPhones
         {
@@ -87,7 +105,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (CleanUpPhone(PhoneHome) + CleanUpPhone(PhoneMobile) + CleanUpPhone(PhoneWork)).Trim();
+                    return (CleanUpPhone(PhoneHome) + CleanUpPhone(PhoneMobile) + CleanUpPhone(PhoneWork) + CleanUpPhone(PhoneHome2)).Trim();
                 }
             }
             set
@@ -114,22 +132,5 @@ namespace WebAddressbookTests
             }
         }
 
-        private string CleanUpEmail(string email)
-        {
-            if (email == null || email == "")
-            {
-                return "";
-            }
-            return email.Trim() + "\r\n";
-        }
-
-        private string CleanUpPhone(string phone)
-        {
-            if (phone == null || phone == "")
-            {
-                return "";
-            }
-            return Regex.Replace(phone, "[ ()-]", "") + "\r\n";
-        }
     }
 }

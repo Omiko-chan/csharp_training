@@ -226,6 +226,7 @@ namespace WebAddressbookTests
             string phoneHome = driver.FindElement(By.Name("home")).GetAttribute("value");
             string phoneMobile = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string phoneWork = driver.FindElement(By.Name("work")).GetAttribute("value");
+            string phoneHome2 = driver.FindElement(By.Name("phone2")).GetAttribute("value");
 
             string email = driver.FindElement(By.Name("email")).GetAttribute("value");
             string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
@@ -237,6 +238,7 @@ namespace WebAddressbookTests
                 PhoneHome = phoneHome,
                 PhoneMobile = phoneMobile,
                 PhoneWork = phoneWork,
+                PhoneHome2=phoneHome2,
                 Email = email,
                 Email2 = email2,
                 Email3 = email3

@@ -21,6 +21,7 @@ namespace WebAddressbookTests
                 PhoneHome="+7 (567) 786-78-89",
                 PhoneMobile="8 976-67-98",
                 PhoneWork = "(495)256-56-65",
+                PhoneHome2="8(495)675-23-21",
                 Email="emailone@mail.ru",
                 Email2="email.two@gmail.com",
                 Email3="email-three@yandex.ru"
