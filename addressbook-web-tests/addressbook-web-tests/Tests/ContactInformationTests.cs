@@ -11,7 +11,7 @@ namespace WebAddressbookTests
     public class ContactInformationTests : AuthTestBase
     {
         [SetUp]
-        public void PreconditionsContactModif()
+        public void PreconditionsContactInform()
         {
             ContactData contactData = new ContactData("Usersurname", "Username")
             {
