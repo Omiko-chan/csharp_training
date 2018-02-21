@@ -12,6 +12,12 @@ namespace WebAddressbookTests
     {
         private string allPhones;
         private string allEmails;
+        private string allContactInfo;
+        private string fio;
+        private string allInfoMain;
+        private string phones;
+        private string webInfo;
+        private string dateInfo;
 
         public ContactData(string lastname, string firstname)
         {
@@ -52,23 +58,49 @@ namespace WebAddressbookTests
             return (Lastname + Firstname).CompareTo(other.Lastname + other.Firstname);
         }
 
-        private string CleanUpEmail(string email)
-        {
-            if (email == null || email == "")
-            {
-                return "";
-            }
-            return email.Trim() + "\r\n";
-        }
-
         private string CleanUpPhone(string phone)
         {
             if (phone == null || phone == "")
             {
                 return "";
             }
-            return Regex.Replace(phone, "[ ()-]", "") + "\r\n";
+            return Regex.Replace(phone, "[ ()-]", "") + "\r\n";           
         }
+        private string CleanUpFIO(string name)
+        {
+            if (name == null || name == "")
+            {
+                return "";
+            }
+            return name.Trim()+" ";
+        }
+        private string CleanUpDate(string day, string month, string year)
+        {
+            string value = "";
+            if (day != null && day != "")
+            {
+                value = day + ". ";
+            }
+            if (month != null && month != "")
+            {
+                value = value +( month.Substring(0,1).ToUpper()+month.Remove(0,1)) + " ";
+            }
+            if (year != null && year != "")
+            {
+                int d = DateTime.Now.Year - Int32.Parse(year);
+                value = value + year + System.String.Format(" ({0})",d);
+            }
+            return value;
+        }
+        private string CleanUpValue(string value)
+        {
+            if (value == null || value == "")
+            {
+                return "";
+            }
+            return value.Trim() + "\r\n";
+        }
+
         public string Id { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }        
@@ -80,7 +112,7 @@ namespace WebAddressbookTests
         public string PhoneHome { get; set; }
         public string PhoneMobile { get; set; }
         public string PhoneWork { get; set; }
-        public string TelephoneFax { get; set; }
+        public string PhoneFax { get; set; }
         public string Email { get; set; }
         public string Email2 { get; set; }
         public string Email3 { get; set; }
@@ -95,6 +127,25 @@ namespace WebAddressbookTests
         public string Address2 { get; set; }
         public string PhoneHome2 { get; set; }
         public string Notes { get; set; }
+        public string FIO
+        {
+            get
+            {
+                if (fio != null)
+                {
+                    return fio;
+                }
+                else
+                {
+                    string val = CleanUpFIO(Firstname)+ CleanUpFIO(Middlename) + CleanUpFIO(Lastname);
+                    return CleanUpValue(val);
+                }
+            }
+            set
+            {
+                fio = value;
+            }
+        }
         public string AllPhones
         {
             get
@@ -123,7 +174,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (CleanUpEmail(Email) + CleanUpEmail(Email2) + CleanUpEmail(Email3)).Trim();
+                    return (CleanUpValue(Email) + CleanUpValue(Email2) + CleanUpValue(Email3)).Trim();
                 }
             }
             set
@@ -131,6 +182,185 @@ namespace WebAddressbookTests
                 allEmails = value;
             }
         }
+        public string AllInfoMain
+        {
+            get
+            {
+                if (allInfoMain != null)
+                {
+                    return allInfoMain;
+                }
+                else
+                {
+                    return FIO + CleanUpValue(NickName) + CleanUpValue(Title) + CleanUpValue(Company) + CleanUpValue(Address);
+                       
+                }
+            }
+            set
+            {
+                allInfoMain = value;
+            }
+        }
+        public string Phones
+        {
+            get
+            {
+                if (phones != null)
+                {
+                    return phones;
+                }
+                else
+                {
+                    string val = "";
+                    if (PhoneHome != null && PhoneHome != "")
+                    {
+                        if (PhoneHome.Trim().Length == 0)
+                        {
+                            val = val + "H:" +  CleanUpValue(PhoneHome);
+                        }
+                        else
+                        {
+                            val = val + "H:" + " " + CleanUpValue(PhoneHome);
+                        }                        
+                    }
+                    if (PhoneMobile != null && PhoneMobile != "")
+                    {
+                        if (PhoneMobile.Trim().Length == 0)
+                        {
+                            val = val + "M:" + CleanUpValue(PhoneMobile);
+                        }
+                        else
+                        {
+                            val = val + "M:" + " " + CleanUpValue(PhoneMobile);
+                        }
+                    }
+                    if (PhoneWork != null && PhoneWork != "")
+                    {
+                        if (PhoneWork.Trim().Length==0)
+                        {
+                            val = val + "W:" + CleanUpValue(PhoneWork);
+                        }
+                        else
+                        {
+                            val = val + "W:" + " " + CleanUpValue(PhoneWork);
+                        }
+                    }
+                    if (PhoneFax != null && PhoneFax != "")
+                    {
+                        if (PhoneFax.Trim().Length==0)
+                        {
+                            val = val + "F:" + CleanUpValue(PhoneFax);
+                        }
+                        else
+                        {
+                            val = val + "F:" + " " + CleanUpValue(PhoneFax);
+                        }
+                    }
+                    return val;
+                }
+            }
+            set
+            {
+                phones = value;
+            }
+        }
+        public string WebInfo
+        {
+            get
+            {
+                if (webInfo != null)
+                {
+                    return webInfo;
+                }
+                else
+                {
+                    string val = CleanUpValue(Email) + CleanUpValue(Email2) + CleanUpValue(Email3);
+                    if (Homepage != null && Homepage != "")
+                    {
+                        val = val + "Homepage:" + "\r\n" + CleanUpValue(Homepage);
+                    }
+                    return val;
+                }
+            }
+            set
+            {
+                webInfo = value; 
+            }
+        }
+        public string DateInfo
+        {
+            get
+            {
+                if (dateInfo != null)
+                {
+                    return dateInfo;
+                }
+                else
+                {
+                    string val = "";
+                    string date = CleanUpDate(BirthdayDay, BirthdayMonth, BirthdayYear);
+                    if (date != null && date != "")
+                    {
+                        val = "Birthday " + date + "\r\n";
+                    }
+                    date = CleanUpDate(AnniversaryDay, AnniversaryMonth, AnniversaryYear);
+                    if (date != null && date != "")
+                    {
+                        val = val + "Anniversary " + date + "\r\n";
+                    }
+                    return val;
+                }
+            }
+            set
+            {
+                dateInfo = value;
+            }
+        }
+
+        public string AllContactInfo
+        {
+            get
+            {
+                if (allContactInfo != null)
+                {
+                    return allContactInfo;
+                }
+                else
+                {
+                    string val = AllInfoMain;
+                    if (Phones != null && Phones != "")
+                    {
+                        val = val + "\r\n" + Phones;
+                    }
+                    if (WebInfo != null && WebInfo != "")
+                    {
+                        val = val + "\r\n" + WebInfo;
+                    }
+                    if (DateInfo != null && DateInfo != "")
+                    {
+                        val = val + "\r\n" + DateInfo;
+                    }
+                    if (CleanUpValue(Address2) != null && CleanUpValue(Address2) != "")
+                    {
+                        val = val + "\r\n" + CleanUpValue(Address2);
+                    }
+                    if (CleanUpValue(PhoneHome2) != null && CleanUpValue(PhoneHome2) != "")
+                    {
+                        val = val + "\r\n" + "P: " + CleanUpValue(PhoneHome2);
+                    }
+                    if (CleanUpValue(Notes) != null && CleanUpValue(Notes) != "")
+                    {
+                        val = val + "\r\n" + CleanUpValue(Notes);
+                    }
+                    return val.Trim();
+                }
+            }
+          set
+            {
+                allContactInfo = value;
+            }
+        }
+
 
     }
 }

@@ -31,7 +31,7 @@ namespace WebAddressbookTests
 
 
         [Test]
-        public void ContactInformationTest()
+        public void ContactInformationEditTest()
         {
             ContactData fromTable = appManager.Contact.GetContactInformationFromTable(0);
             ContactData fromForm = appManager.Contact.GetContactInformationEditForm(0);
@@ -39,6 +39,14 @@ namespace WebAddressbookTests
             Assert.AreEqual(fromTable.Address, fromForm.Address);
             Assert.AreEqual(fromTable.AllPhones,fromForm.AllPhones);
             Assert.AreEqual(fromTable.AllEmails, fromForm.AllEmails);
+        }
+
+        [Test]
+        public void ContactInformationDetailsTest()
+        {
+            ContactData fromForm = appManager.Contact.GetContactInformationEditForm(0);
+            ContactData fromDetails = appManager.Contact.GetContactInformationDetailsForm(0);
+            Assert.AreEqual(fromForm.AllContactInfo, fromDetails.AllContactInfo);
         }
     }
 }
