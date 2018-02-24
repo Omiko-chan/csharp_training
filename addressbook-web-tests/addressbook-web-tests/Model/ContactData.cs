@@ -74,6 +74,22 @@ namespace WebAddressbookTests
             }
             return name.Trim()+" ";
         }
+        private int CalculateAge(string day, string month, string year)
+        {
+            Dictionary<string, int> months = new Dictionary<string, int>()
+            {
+                {"january", 1},{"february", 2},{"march", 3},{"april", 4},{"may", 5},{"june", 6},{"july", 7},{"august", 8},{"september", 9}
+                ,{"october", 10},{"november", 11},{"december", 12}
+            };
+            int nmonth = months[month];
+            int YearsPassed = DateTime.Now.Year - Int32.Parse(year);
+            if (DateTime.Now.Month < nmonth || (DateTime.Now.Month == nmonth && DateTime.Now.Day < Int32.Parse(day)))
+            {
+                YearsPassed--;
+            }
+            return YearsPassed;
+        }
+
         private string CleanUpDate(string day, string month, string year)
         {
             string value = "";
@@ -87,7 +103,7 @@ namespace WebAddressbookTests
             }
             if (year != null && year != "")
             {
-                int d = DateTime.Now.Year - Int32.Parse(year);
+                int d = CalculateAge(day, month.ToLower(), year);
                 value = value + year + System.String.Format(" ({0})",d);
             }
             return value;
