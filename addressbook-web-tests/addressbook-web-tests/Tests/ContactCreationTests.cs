@@ -84,7 +84,7 @@ namespace WebAddressbookTests
             return contactData;
         }
 
-        [Test, TestCaseSource("ContactDataFromXmlFile")]
+        [Test, TestCaseSource("ContactDataFromCsvFile")]
         public void ContactCreationTest(ContactData contactData)
         {
 

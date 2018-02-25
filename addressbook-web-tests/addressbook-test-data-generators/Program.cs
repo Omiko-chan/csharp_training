@@ -137,7 +137,7 @@ namespace addressbook_test_data_generators
         {
             foreach (GroupData group in groups)
             {
-                writer.WriteLine(String.Format("${0},${1},${2}",
+                writer.WriteLine(String.Format("{0},{1},{2}",
                     group.Name, group.Header, group.Footer));
             }
         }
@@ -167,8 +167,8 @@ namespace addressbook_test_data_generators
         {
             foreach (ContactData contact in contacts)
             {
-                writer.WriteLine(String.Format("${0},${1},${3},${4},${5}",
-                    contact.Lastname,contact.Firstname,contact.BirthdayDay,contact.BirthdayDay,contact.BirthdayYear));
+                writer.WriteLine(String.Format("{0},{1},{2},{3},{4}",
+                    contact.Lastname,contact.Firstname,contact.BirthdayDay,contact.BirthdayMonth,contact.BirthdayYear));
             }
         }
         private static void writeContactsToExcelFile(List<ContactData> contacts, string filename)
