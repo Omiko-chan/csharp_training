@@ -77,11 +77,11 @@ namespace WebAddressbookTests
             }
             wb.Close();
             app.Visible = false;
+            app.Quit();
             return groupData;
         }
 
-
-        [Test,TestCaseSource("GroupDataFromJsonFile")]
+        [Test,TestCaseSource("GroupDataFromExcelFile")]
         public void GroupCreationTest(GroupData groupData)
         {
              List<GroupData> oldGroups = appManager.Group.GetGroupList();

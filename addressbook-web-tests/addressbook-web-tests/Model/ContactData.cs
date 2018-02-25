@@ -19,6 +19,8 @@ namespace WebAddressbookTests
         private string webInfo;
         private string dateInfo;
 
+        public ContactData() { }
+
         public ContactData(string lastname, string firstname)
         {
             Lastname = lastname;
