@@ -33,8 +33,9 @@ namespace WebAddressbookTests
         [Test]
         public void ContactInformationEditTest()
         {
-            ContactData fromTable = appManager.Contact.GetContactInformationFromTable(0);
-            ContactData fromForm = appManager.Contact.GetContactInformationEditForm(0);
+            int index = 0;
+            ContactData fromTable = appManager.Contact.GetContactInformationFromTable(index);
+            ContactData fromForm = appManager.Contact.GetContactInformationEditForm(index);
             Assert.AreEqual(fromTable, fromForm);
             Assert.AreEqual(fromTable.Address, fromForm.Address);
             Assert.AreEqual(fromTable.AllPhones,fromForm.AllPhones);
@@ -44,8 +45,9 @@ namespace WebAddressbookTests
         [Test]
         public void ContactInformationDetailsTest()
         {
-            ContactData fromForm = appManager.Contact.GetContactInformationEditForm(0);
-            ContactData fromDetails = appManager.Contact.GetContactInformationDetailsForm(0);
+            int index = 1;
+            ContactData fromForm = appManager.Contact.GetContactInformationEditForm(index);
+            ContactData fromDetails = appManager.Contact.GetContactInformationDetailsForm(index);
             Assert.AreEqual(fromForm.AllContactInfo, fromDetails.AllContactInfo);
         }
     }
