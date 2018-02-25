@@ -167,8 +167,8 @@ namespace addressbook_test_data_generators
         {
             foreach (ContactData contact in contacts)
             {
-                writer.WriteLine(String.Format("${0},${1}",
-                    contact.Lastname,contact.Firstname));
+                writer.WriteLine(String.Format("${0},${1},${3},${4},${5}",
+                    contact.Lastname,contact.Firstname,contact.BirthdayDay,contact.BirthdayDay,contact.BirthdayYear));
             }
         }
         private static void writeContactsToExcelFile(List<ContactData> contacts, string filename)
@@ -182,6 +182,10 @@ namespace addressbook_test_data_generators
             {
                 sheet.Cells[row, 1] = contact.Lastname;
                 sheet.Cells[row, 2] = contact.Firstname;
+                sheet.Cells[row, 3] = contact.BirthdayDay;
+                sheet.Cells[row, 4] = contact.BirthdayMonth;
+                sheet.Cells[row, 5] = contact.BirthdayYear;
+
                 row++;
             }
             string fullPath = Path.Combine(Directory.GetCurrentDirectory(), filename);

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfContactData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ContactData>
+    <Firstname>I61K=</Firstname>
+    <Lastname>L=):]</Lastname>
+    <BirthdayDay>11</BirthdayDay>
+    <BirthdayMonth>May</BirthdayMonth>
+    <BirthdayYear>1987</BirthdayYear>
+    <FIO>I61K= L=):]
+</FIO>
+    <AllPhones />
+    <AllEmails />
+    <AllInfoMain>I61K= L=):]
+</AllInfoMain>
+    <Phones />
+    <WebInfo />
+    <DateInfo>Birthday 11. May 1987 (30)
+</DateInfo>
+    <AllContactInfo>I61K= L=):]
+
+Birthday 11. May 1987 (30)</AllContactInfo>
+  </ContactData>
+  <ContactData>
+    <Firstname>NMa:</Firstname>
+    <Lastname>WEG$T"W</Lastname>
+    <BirthdayDay>11</BirthdayDay>
+    <BirthdayMonth>May</BirthdayMonth>
+    <BirthdayYear>1987</BirthdayYear>
+    <FIO>NMa: WEG$T"W
+</FIO>
+    <AllPhones />
+    <AllEmails />
+    <AllInfoMain>NMa: WEG$T"W
+</AllInfoMain>
+    <Phones />
+    <WebInfo />
+    <DateInfo>Birthday 11. May 1987 (30)
+</DateInfo>
+    <AllContactInfo>NMa: WEG$T"W
+
+Birthday 11. May 1987 (30)</AllContactInfo>
+  </ContactData>
+  <ContactData>
+    <Firstname>&lt;'&amp;043a+)</Firstname>
+    <Lastname>B6VL</Lastname>
+    <BirthdayDay>11</BirthdayDay>
+    <BirthdayMonth>May</BirthdayMonth>
+    <BirthdayYear>1987</BirthdayYear>
+    <FIO>&lt;'&amp;043a+) B6VL
+</FIO>
+    <AllPhones />
+    <AllEmails />
+    <AllInfoMain>&lt;'&amp;043a+) B6VL
+</AllInfoMain>
+    <Phones />
+    <WebInfo />
+    <DateInfo>Birthday 11. May 1987 (30)
+</DateInfo>
+    <AllContactInfo>&lt;'&amp;043a+) B6VL
+
+Birthday 11. May 1987 (30)</AllContactInfo>
+  </ContactData>
+</ArrayOfContactData>

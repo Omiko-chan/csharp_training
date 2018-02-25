@@ -29,8 +29,62 @@ namespace WebAddressbookTests
             }
             return contactData;
         }
+        public static IEnumerable<ContactData> ContactDataFromCsvFile()
+        {
+            List<ContactData> contactData = new List<ContactData>();
+            string[] lines = File.ReadAllLines(@"contacts.csv");
+            foreach (string l in lines)
+            {
+                string[] parts = l.Split(',');
+                contactData.Add(new ContactData(parts[0],parts[1])
+                {
+                    BirthdayDay = parts[2],
+                    BirthdayMonth = parts[3],
+                    BirthdayYear = parts[4]
+                });
+            }
+            return contactData;
+        }
 
-        [Test, TestCaseSource("RandomContactDataProvider")]
+        public static IEnumerable<ContactData> ContactDataFromXmlFile()
+        {
+            List<ContactData> contactData = new List<ContactData>();
+            return (List<ContactData>)
+                new XmlSerializer(typeof(List<ContactData>))
+                .Deserialize(new StreamReader(@"contacts.xml"));
+        }
+
+        public static IEnumerable<ContactData> ContactDataFromJsonFile()
+        {
+            List<ContactData> contactData = new List<ContactData>();
+            return JsonConvert.DeserializeObject<List<ContactData>>(File.ReadAllText(@"contacts.json"));
+        }
+
+        public static IEnumerable<ContactData> ContactDataFromExcelFile()
+        {
+            List<ContactData> contactData = new List<ContactData>();
+            Excel.Application app = new Excel.Application();
+            Excel.Workbook wb = app.Workbooks.Open(Path.Combine(Directory.GetCurrentDirectory(), @"contacts.xlsx"));
+            Excel.Worksheet sheet = wb.ActiveSheet;
+            Excel.Range range = sheet.UsedRange;
+            for (int i = 1; i <= range.Rows.Count; i++)
+            {
+                contactData.Add(new ContactData()
+                {
+                    Lastname = range.Cells[i, 1].Value,
+                    Firstname = range.Cells[i, 2].Value,
+                    BirthdayDay = range.Cells[i, 3].Value,
+                    BirthdayMonth = range.Cells[i, 4].Value,
+                    BirthdayYear = range.Cells[i, 5].Value,
+                });
+            }
+            wb.Close();
+            app.Visible = false;
+            app.Quit();
+            return contactData;
+        }
+
+        [Test, TestCaseSource("ContactDataFromXmlFile")]
         public void ContactCreationTest(ContactData contactData)
         {
 
