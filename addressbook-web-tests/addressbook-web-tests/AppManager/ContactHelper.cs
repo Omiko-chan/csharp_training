@@ -45,11 +45,18 @@ namespace WebAddressbookTests
 
         public ContactHelper RemoveFromList(int p)
         {
-                SelectContact(p);
-                RemoveContactList();
-                manager.Navigator.GoToHomePage();
+            SelectContact(p);
+            RemoveContactList();
+            manager.Navigator.GoToHomePage();
             return this;
+        }
 
+        public ContactHelper RemoveFromList(ContactData contact)
+        {
+            SelectContact(contact.Id);
+            RemoveContactList();
+            manager.Navigator.GoToHomePage();
+            return this;
         }
 
         public ContactHelper RemoveFromCardEdit(int p)
@@ -123,6 +130,12 @@ namespace WebAddressbookTests
         public ContactHelper SelectContact(int index)
         {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
+            return this;
+        }
+
+        public ContactHelper SelectContact(string id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='"+id+"'])")).Click();
             return this;
         }
 

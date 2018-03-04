@@ -30,13 +30,13 @@ namespace WebAddressbookTests
                 Header = "HeaderModifGroup",
                 Footer = "FooterModifGroup"
             };
-            List<GroupData> oldGroups = appManager.Group.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
             GroupData oldData = oldGroups[0];
-            appManager.Group.Modify(0, newData);
+            appManager.Group.Modify(oldData, newData);
 
             Assert.AreEqual(oldGroups.Count, appManager.Group.GetGroupList().Count);
 
-            List<GroupData> newGroups = appManager.Group.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             oldGroups[0].Name=newData.Name;
             oldGroups.Sort();
             newGroups.Sort();
@@ -59,13 +59,13 @@ namespace WebAddressbookTests
                 Header = null,
                 Footer = null
             };
-            List<GroupData> oldGroups = appManager.Group.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
             GroupData oldData = oldGroups[0];
-            appManager.Group.Modify(0, newData);
+            appManager.Group.Modify(oldData, newData);
 
             Assert.AreEqual(oldGroups.Count, appManager.Group.GetGroupList().Count);
 
-            List<GroupData> newGroups = appManager.Group.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             oldGroups[0].Name = newData.Name;
             oldGroups.Sort();
             newGroups.Sort();

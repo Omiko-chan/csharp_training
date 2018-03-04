@@ -26,14 +26,14 @@ namespace WebAddressbookTests
         [Test]
         public void ContactRemovalListTest()
         {
-            List<ContactData> oldContact = appManager.Contact.GetContactList();
+            List<ContactData> oldContact = ContactData.GetAll();
             ContactData toBeRemoved = oldContact[0];
 
-            appManager.Contact.RemoveFromList(0);
+            appManager.Contact.RemoveFromList(toBeRemoved);
 
             Assert.AreEqual(oldContact.Count - 1, appManager.Contact.GetContactList().Count);
 
-            List<ContactData> newContact = appManager.Contact.GetContactList();
+            List<ContactData> newContact = ContactData.GetAll();
             oldContact.RemoveAt(0);
             Assert.AreEqual(oldContact, newContact);
             foreach (ContactData contact in newContact)
@@ -82,5 +82,26 @@ namespace WebAddressbookTests
             }
 
         }
+
+
+        [Test]
+        public void TestDBConnectiviti()
+        {
+            DateTime start = DateTime.Now;
+            List<ContactData> fromUI = appManager.Contact.GetContactList();
+            DateTime end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(start));
+
+            start = DateTime.Now;
+
+            List<ContactData> fromDB = ContactData.GetAll();
+            end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(start));
+            System.Console.Out.WriteLine(fromDB[1].Deprecated);
+
+        }
+
+
     }
+
 }

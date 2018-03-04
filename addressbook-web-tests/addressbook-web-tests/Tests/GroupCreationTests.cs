@@ -85,13 +85,13 @@ namespace WebAddressbookTests
         [Test,TestCaseSource("GroupDataFromJsonFile")]
         public void GroupCreationTest(GroupData groupData)
         {
-             List<GroupData> oldGroups = appManager.Group.GetGroupList();
+             List<GroupData> oldGroups = GroupData.GetAll();
 
             appManager.Group.Create(groupData);
 
             Assert.AreEqual(oldGroups.Count + 1, appManager.Group.GetGroupList().Count);
 
-            List<GroupData> newGroups = appManager.Group.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             oldGroups.Add(groupData);
             oldGroups.Sort();
             newGroups.Sort();
@@ -107,13 +107,13 @@ namespace WebAddressbookTests
                 Footer = ""
             };
 
-            List<GroupData> oldGroups = appManager.Group.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
 
             appManager.Group.Create(groupData);
 
             Assert.AreEqual(oldGroups.Count + 1, appManager.Group.GetGroupList().Count);
 
-            List<GroupData> newGroups = appManager.Group.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             oldGroups.Add(groupData);
             oldGroups.Sort();
             newGroups.Sort();

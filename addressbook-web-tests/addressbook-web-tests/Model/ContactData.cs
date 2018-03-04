@@ -129,7 +129,7 @@ namespace WebAddressbookTests
         public string Lastname { get; set; }
         [Column(Name = "middlename"), NotNull]
         public string Middlename { get; set; }
-        [Column(Name = "nickname	"), NotNull]
+        [Column(Name = "nickname"), NotNull]
         public string NickName { get; set; }
         [Column(Name = "title"), NotNull]
         public string Title { get; set; }
@@ -172,6 +172,8 @@ namespace WebAddressbookTests
         public string PhoneHome2 { get; set; }
         [Column(Name = "notes"), NotNull]
         public string Notes { get; set; }
+        [Column(Name = "deprecated"),NotNull]
+        public DateTime Deprecated { get; set; }
         public string FIO
         {
             get
@@ -409,7 +411,7 @@ namespace WebAddressbookTests
         {
             using (AddressBookDB db = new AddressBookDB())
             {
-                return (from c in db.Contacts select c).ToList();
+                return (from c in db.Contacts /*where c.Deprecated == "00.00.0000 00:00:00" */ select c).ToList();
             }
         }
 

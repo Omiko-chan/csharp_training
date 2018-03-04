@@ -23,14 +23,14 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemovalTest()
         {
-            List<GroupData> oldGroups = appManager.Group.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
             GroupData toBeRemoved = oldGroups[0];
 
-            appManager.Group.Remove(0);
+            appManager.Group.Remove(toBeRemoved);
 
             Assert.AreEqual(oldGroups.Count - 1, appManager.Group.GetGroupList().Count);
 
-            List<GroupData> newGroups = appManager.Group.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             oldGroups.RemoveAt(0);
             Assert.AreEqual(oldGroups, newGroups);
             foreach (GroupData group in newGroups)
