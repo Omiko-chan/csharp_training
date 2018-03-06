@@ -34,13 +34,13 @@ namespace WebAddressbookTests
                 PhoneWork = "(495)256-56-65"
             };
 
-            List<ContactData> oldContact = appManager.Contact.GetContactList();
+            List<ContactData> oldContact = ContactData.GetAll();
             ContactData oldData = oldContact[0];
-            appManager.Contact.ModifyFromList(0, newData);
+            appManager.Contact.ModifyFromList(oldData, newData);
 
             Assert.AreEqual(oldContact.Count, appManager.Contact.GetContactList().Count);
 
-            List<ContactData> newContact = appManager.Contact.GetContactList();
+            List<ContactData> newContact = ContactData.GetAll();
             oldContact[0].Lastname = newData.Lastname;
             oldContact[0].Firstname = newData.Firstname;
             oldContact.Sort();
@@ -67,14 +67,14 @@ namespace WebAddressbookTests
                 PhoneWork = null
             };
 
-            List<ContactData> oldContact = appManager.Contact.GetContactList();
+            List<ContactData> oldContact = ContactData.GetAll();
             ContactData oldData = oldContact[0];
 
-            appManager.Contact.ModifyFromList(0, newData);
+            appManager.Contact.ModifyFromList(oldData, newData);
 
             Assert.AreEqual(oldContact.Count, appManager.Contact.GetContactList().Count);
 
-            List<ContactData> newContact = appManager.Contact.GetContactList();
+            List<ContactData> newContact = ContactData.GetAll();
             oldContact[0].Lastname = newData.Lastname;
             oldContact.Sort();
             newContact.Sort();
@@ -100,14 +100,14 @@ namespace WebAddressbookTests
                 PhoneWork = "(495)256-56-65"
             };
 
-            List<ContactData> oldContact = appManager.Contact.GetContactList();
+            List<ContactData> oldContact = ContactData.GetAll();
             ContactData oldData = oldContact[0];
 
-            appManager.Contact.ModifyFromDetails(0, newData);
+            appManager.Contact.ModifyFromDetails(oldData, newData);
 
             Assert.AreEqual(oldContact.Count, appManager.Contact.GetContactList().Count);
 
-            List<ContactData> newContact = appManager.Contact.GetContactList();
+            List<ContactData> newContact = ContactData.GetAll();
             oldContact[0].Lastname = newData.Lastname;
             oldContact[0].Firstname = newData.Firstname;
             oldContact.Sort();
@@ -133,14 +133,14 @@ namespace WebAddressbookTests
                 PhoneWork = null
             };
 
-            List<ContactData> oldContact = appManager.Contact.GetContactList();
+            List<ContactData> oldContact = ContactData.GetAll();
             ContactData oldData = oldContact[0];
 
-            appManager.Contact.ModifyFromDetails(0, newData);
+            appManager.Contact.ModifyFromDetails(oldData, newData);
 
             Assert.AreEqual(oldContact.Count, appManager.Contact.GetContactList().Count);
 
-            List<ContactData> newContact = appManager.Contact.GetContactList();
+            List<ContactData> newContact = ContactData.GetAll();
             oldContact[0].Lastname = newData.Lastname;
             oldContact.Sort();
             newContact.Sort();

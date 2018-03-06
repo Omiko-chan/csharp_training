@@ -35,9 +35,24 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper ModifyFromList(ContactData oldData, ContactData newData)
+        {
+            InitContactCardFromList(oldData.Id);
+            Modify(newData);
+            return this;
+        }
+
         public ContactHelper ModifyFromDetails(int p, ContactData newData)
         {
             BrowseContactDetail(p);
+            InitContactCardFromDetail();
+            Modify(newData);
+            return this;
+        }
+
+        public ContactHelper ModifyFromDetails(ContactData oldData, ContactData newData)
+        {
+            BrowseContactDetail(oldData.Id);
             InitContactCardFromDetail();
             Modify(newData);
             return this;

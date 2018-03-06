@@ -84,16 +84,16 @@ namespace WebAddressbookTests
             return contactData;
         }
 
-        [Test, TestCaseSource("ContactDataFromCsvFile")]
+        [Test, TestCaseSource("ContactDataFromJsonFile")]
         public void ContactCreationTest(ContactData contactData)
         {
 
-            List<ContactData> oldContact = appManager.Contact.GetContactList();
+            List<ContactData> oldContact = ContactData.GetAll();
             appManager.Contact.Create(contactData);
 
             Assert.AreEqual(oldContact.Count + 1, appManager.Contact.GetContactList().Count);
 
-            List<ContactData> newContact = appManager.Contact.GetContactList();
+            List<ContactData> newContact = ContactData.GetAll();
             oldContact.Add(contactData);
             oldContact.Sort();
             newContact.Sort();
