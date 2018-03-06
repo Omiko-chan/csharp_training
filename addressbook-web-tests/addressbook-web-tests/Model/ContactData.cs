@@ -411,7 +411,7 @@ namespace WebAddressbookTests
         {
             using (AddressBookDB db = new AddressBookDB())
             {
-                return (from c in db.Contacts /*where c.Deprecated == "00.00.0000 00:00:00" */ select c).ToList();
+                return (from c in db.Contacts where c.Deprecated == null select c).ToList();
             }
         }
 

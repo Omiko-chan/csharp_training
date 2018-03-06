@@ -67,9 +67,25 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper RemoveFromCardEdit(ContactData contact)
+        {
+            InitContactCardFromList(contact.Id);
+            RemoveContactCard();
+            manager.Navigator.GoToHomePage();
+            return this;
+        }
+
         public ContactHelper RemoveFromCardDetails(int p)
         {
             BrowseContactDetail(p);
+            InitContactCardFromDetail();
+            RemoveContactCard();
+            manager.Navigator.GoToHomePage();
+            return this;
+        }
+        public ContactHelper RemoveFromCardDetails(ContactData contact)
+        {
+            BrowseContactDetail(contact.Id);
             InitContactCardFromDetail();
             RemoveContactCard();
             manager.Navigator.GoToHomePage();
@@ -154,6 +170,13 @@ namespace WebAddressbookTests
             return this;
         }
 
+        private ContactHelper InitContactCardFromList(string id)
+        {
+            driver.Manage().Timeouts().ImplicitWait = new TimeSpan(20);
+            driver.FindElement(By.XPath("//a[@href='edit.php?id=" + id + "']//img[@alt='Edit']")).Click();
+            return this;
+        }
+
         private ContactHelper InitContactCardFromDetail()
         {
             driver.FindElement(By.Name("modifiy")).Click(); 
@@ -165,6 +188,14 @@ namespace WebAddressbookTests
         {
             driver.Manage().Timeouts().ImplicitWait = new TimeSpan(20);
             driver.FindElement(By.XPath("(//img[@alt='Details'])[" + (index + 1) + "]")).Click();
+            return this;
+        }
+
+        private ContactHelper BrowseContactDetail(string id)
+
+        {
+            driver.Manage().Timeouts().ImplicitWait = new TimeSpan(20);
+            driver.FindElement(By.XPath("//a[@href='view.php?id="+id+"']//img[@alt='Details']")).Click();
             return this;
         }
 

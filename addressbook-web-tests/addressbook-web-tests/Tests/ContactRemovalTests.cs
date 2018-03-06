@@ -46,14 +46,14 @@ namespace WebAddressbookTests
         [Test]
         public void ContactRemovalCardDetailsTest()
         {
-            List<ContactData> oldContact = appManager.Contact.GetContactList();
+            List<ContactData> oldContact = ContactData.GetAll();
             ContactData toBeRemoved = oldContact[0];
 
-            appManager.Contact.RemoveFromCardDetails(0);
+            appManager.Contact.RemoveFromCardDetails(toBeRemoved);
 
             Assert.AreEqual(oldContact.Count - 1, appManager.Contact.GetContactList().Count);
 
-            List<ContactData> newContact = appManager.Contact.GetContactList();
+            List<ContactData> newContact = ContactData.GetAll();
             oldContact.RemoveAt(0);
             Assert.AreEqual(oldContact, newContact);
             foreach (ContactData contact in newContact)
@@ -66,14 +66,14 @@ namespace WebAddressbookTests
         [Test]
         public void ContactRemovalCardEditTest()
         {
-            List<ContactData> oldContact = appManager.Contact.GetContactList();
+            List<ContactData> oldContact = ContactData.GetAll();
             ContactData toBeRemoved = oldContact[0];
 
-            appManager.Contact.RemoveFromCardEdit(0);
+            appManager.Contact.RemoveFromCardEdit(toBeRemoved);
 
             Assert.AreEqual(oldContact.Count - 1, appManager.Contact.GetContactList().Count);
 
-            List<ContactData> newContact = appManager.Contact.GetContactList();
+            List<ContactData> newContact = ContactData.GetAll();
             oldContact.RemoveAt(0);
             Assert.AreEqual(oldContact, newContact);
             foreach (ContactData contact in newContact)
