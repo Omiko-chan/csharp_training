@@ -37,6 +37,24 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public bool FindGroupWithoutContact()
+        {
+            int count = GroupData.GetAll().Count();
+            int i = 0;
+            bool b = false;
+            while (i < count && b == false)
+            {
+                i++;
+                int contactsCount = ContactData.GetAll().Count;
+                int contactsInGroupCount = GroupData.GetAll()[i].GetContacts().Count;
+                if (contactsCount != contactsInGroupCount)
+                {
+                    b = true;
+                }
+            }
+            return b;
+        }
+
         public GroupHelper Modify(GroupData oldData, GroupData newData)
         {
             SelectGroup(oldData.Id);

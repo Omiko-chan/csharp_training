@@ -10,13 +10,25 @@ namespace WebAddressbookTests
 {
     public class AddingContactToGroupTests : AuthTestBase
     {
+        [SetUp]
+        public void PreconditionsContactRemove()
+        {
+            ContactData contactData = new ContactData("Username", "Usersurname")
+            {
+                BirthdayDay = "22",
+                BirthdayMonth = "October",
+                BirthdayYear = "1990",
+                PhoneWork = "(495)256-56-65"
+            };
+            if (appManager.Group.FindGroupWithoutContact() == false)
+            {
+                appManager.Contact.Create(contactData);
+            }
+        }
+
         [Test]
         public void ContactAddingToGroupTest()
         {
-
-
-
-            //int count = GroupData.GetAll().Count();
             GroupData group = GroupData.GetAll()[0];
             List<ContactData> oldList = group.GetContacts();
             ContactData contact = ContactData.GetAll().Except(oldList).First();
@@ -28,8 +40,6 @@ namespace WebAddressbookTests
             oldList.Sort();
 
             Assert.AreEqual(oldList, newList);
-
-
         }
     }
 }
