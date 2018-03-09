@@ -45,13 +45,20 @@ namespace WebAddressbookTests
             while (i < count && b == false)
             {
                 i++;
-                int contactsCount = ContactData.GetAll().Count;
-                int contactsInGroupCount = GroupData.GetAll()[i].GetContacts().Count;
-                if (contactsCount != contactsInGroupCount)
-                {
-                    b = true;
-                }
+                b = AllContactsInGroup(i, b);
             }
+            return b;
+        }
+
+        private static bool AllContactsInGroup(int i, bool b)
+        {
+            int contactsCount = ContactData.GetAll().Count;
+            int contactsInGroupCount = GroupData.GetAll()[i].GetContacts().Count;
+            if (contactsCount != contactsInGroupCount)
+            {
+                b = true;
+            }
+
             return b;
         }
 
