@@ -86,11 +86,12 @@
     <Compile Include="AppManager\NavigationHelper.cs" />
     <Compile Include="AppManager\LoginHelper.cs" />
     <Compile Include="Model\AddressBookDB.cs" />
-    <Compile Include="Tests\AddingContactToGroupTests.cs" />
+    <Compile Include="Tests\ContactAddingToGroupTests.cs" />
     <Compile Include="Tests\AuthTestBase.cs" />
     <Compile Include="Tests\ContactInformationTests.cs" />
     <Compile Include="Tests\ContactModificationTests.cs" />
     <Compile Include="Tests\ContactRemovalTests.cs" />
+    <Compile Include="Tests\ContactRemovedFromGroupTests.cs" />
     <Compile Include="Tests\ContactTestBase.cs" />
     <Compile Include="Model\GroupContactRelation.cs" />
     <Compile Include="Tests\GroupModificationTests.cs" />

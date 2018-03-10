@@ -10,6 +10,7 @@ namespace WebAddressbookTests
 {
     public class AddingContactToGroupTests : AuthTestBase
     {
+        public string id = null;
         [SetUp]
         public void PreconditionsContactRemove()
         {
@@ -20,16 +21,22 @@ namespace WebAddressbookTests
                 BirthdayYear = "1990",
                 PhoneWork = "(495)256-56-65"
             };
-            if (appManager.Group.FindGroupWithoutContact() == false)
+            if (appManager.Group.FindGroupWithoutContact().Item1 == false)
             {
                 appManager.Contact.Create(contactData);
+            }
+            else
+            {
+                id = appManager.Group.FindGroupWithoutContact().Item2;
             }
         }
 
         [Test]
         public void ContactAddingToGroupTest()
         {
-            GroupData group = GroupData.GetAll()[0];
+            List<GroupData> groups = GroupData.GetAll();
+
+            GroupData group = groups.Where(p =>p.Id==id).Single();
             List<ContactData> oldList = group.GetContacts();
             ContactData contact = ContactData.GetAll().Except(oldList).First();
             appManager.Contact.AddContactToGroup(contact, group);

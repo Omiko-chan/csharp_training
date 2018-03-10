@@ -84,22 +84,22 @@ namespace WebAddressbookTests
         }
 
 
-        [Test]
-        public void TestDBConnectiviti()
-        {
-            DateTime start = DateTime.Now;
-            List<ContactData> fromUI = appManager.Contact.GetContactList();
-            DateTime end = DateTime.Now;
-            System.Console.Out.WriteLine(end.Subtract(start));
+        //[Test]
+        //public void TestDBConnectiviti()
+        //{
+        //    DateTime start = DateTime.Now;
+        //    List<ContactData> fromUI = appManager.Contact.GetContactList();
+        //    DateTime end = DateTime.Now;
+        //    System.Console.Out.WriteLine(end.Subtract(start));
 
-            start = DateTime.Now;
+        //    start = DateTime.Now;
 
-            List<ContactData> fromDB = ContactData.GetAll();
-            end = DateTime.Now;
-            System.Console.Out.WriteLine(end.Subtract(start));
-            System.Console.Out.WriteLine(fromDB[1].Deprecated);
+        //    List<ContactData> fromDB = ContactData.GetAll();
+        //    end = DateTime.Now;
+        //    System.Console.Out.WriteLine(end.Subtract(start));
+        //    System.Console.Out.WriteLine(fromDB[1].Deprecated);
 
-        }
+        //}
 
 
     }

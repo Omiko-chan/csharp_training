@@ -37,20 +37,39 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public bool FindGroupWithoutContact()
+        public Tuple<bool, string> FindGroupWithContact()
         {
-            int count = GroupData.GetAll().Count();
+            List<GroupData> groups = GroupData.GetAll();
+            int count = groups.Count();
             int i = 0;
             bool b = false;
+            string id = null;
             while (i < count && b == false)
             {
+                b = GroupNotEmpty(i, b).Item1;
                 i++;
-                b = AllContactsInGroup(i, b);
             }
-            return b;
+            id = GroupNotEmpty(i-1, b).Item2;
+            return new Tuple<bool, string>(b, id);
         }
 
-        private static bool AllContactsInGroup(int i, bool b)
+        public Tuple<bool,string>  FindGroupWithoutContact()
+        {
+            List<GroupData> groups = GroupData.GetAll();
+            int count = groups.Count();
+            int i = 0;
+            bool b = false;
+            string id = null;
+            while (i < count && b == false)
+            {
+                b = AllContactsInGroup(i, b).Item1;
+                i++;
+            }
+            id = AllContactsInGroup(i-1, b).Item2;
+            return new Tuple<bool, string>(b, id);       
+        }
+
+        private static Tuple<bool, string> AllContactsInGroup(int i, bool b)
         {
             int contactsCount = ContactData.GetAll().Count;
             int contactsInGroupCount = GroupData.GetAll()[i].GetContacts().Count;
@@ -59,7 +78,17 @@ namespace WebAddressbookTests
                 b = true;
             }
 
-            return b;
+            return new Tuple<bool, string>(b, ContactData.GetAll()[i].Id);
+        }
+
+        private static Tuple<bool, string> GroupNotEmpty(int i, bool b)
+        {
+            int contactsInGroupCount = GroupData.GetAll()[i].GetContacts().Count;
+            if (contactsInGroupCount >0)
+            {
+                b = true;
+            }
+            return new Tuple<bool, string>(b, ContactData.GetAll()[i].Id);
         }
 
         public GroupHelper Modify(GroupData oldData, GroupData newData)
