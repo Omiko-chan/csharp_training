@@ -47,9 +47,12 @@ namespace WebAddressbookTests
             while (i < count && b == false)
             {
                 b = GroupNotEmpty(i, b).Item1;
+                if (b==true)
+                {
+                    id = GroupNotEmpty(i, b).Item2;
+                }
                 i++;
             }
-            id = GroupNotEmpty(i-1, b).Item2;
             return new Tuple<bool, string>(b, id);
         }
 
@@ -63,9 +66,13 @@ namespace WebAddressbookTests
             while (i < count && b == false)
             {
                 b = AllContactsInGroup(i, b).Item1;
+                if (b == true)
+                {
+                    id = AllContactsInGroup(i, b).Item2;
+                }
+
                 i++;
             }
-            id = AllContactsInGroup(i-1, b).Item2;
             return new Tuple<bool, string>(b, id);       
         }
 
@@ -78,7 +85,7 @@ namespace WebAddressbookTests
                 b = true;
             }
 
-            return new Tuple<bool, string>(b, ContactData.GetAll()[i].Id);
+            return new Tuple<bool, string>(b, GroupData.GetAll()[i].Id);
         }
 
         private static Tuple<bool, string> GroupNotEmpty(int i, bool b)
@@ -88,7 +95,7 @@ namespace WebAddressbookTests
             {
                 b = true;
             }
-            return new Tuple<bool, string>(b, ContactData.GetAll()[i].Id);
+            return new Tuple<bool, string>(b, GroupData.GetAll()[i].Id);
         }
 
         public GroupHelper Modify(GroupData oldData, GroupData newData)
