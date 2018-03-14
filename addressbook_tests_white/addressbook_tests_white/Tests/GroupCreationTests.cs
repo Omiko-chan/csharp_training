@@ -12,7 +12,8 @@ namespace addressbook_tests_white
         public static IEnumerable<GroupData> GroupDataFromJsonFile()
         {
             List<GroupData> groupData = new List<GroupData>();
-            return JsonConvert.DeserializeObject<List<GroupData>>(File.ReadAllText(@"groups.json"));
+            string dir=TestContext.CurrentContext.TestDirectory;
+            return JsonConvert.DeserializeObject<List<GroupData>>(File.ReadAllText(@"dir\groups.json"));
         }
 
         [Test, TestCaseSource("GroupDataFromJsonFile")]
@@ -29,7 +30,23 @@ namespace addressbook_tests_white
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
-
         }
+
+        //[Test]
+        //public void TestGroupGreationLevelTwo()
+        //{
+        //    {
+        //        if (!IsGroupIn())
+        //        {
+        //            Create(group);
+        //        }
+        //    }
+        //    List<GroupData> oldGroups = app.Groups.GetGroupList();
+        //    GroupData newGroup = new GroupData()
+        //    {
+        //        Name = "white"
+        //    };
+
+        //}
     }
 }
