@@ -9,6 +9,7 @@ using TestStack.White.UIItems.TreeItems;
 using TestStack.White.UIItems.WindowItems;
 using System.Windows.Automation;
 
+
 namespace addressbook_tests_white
 {
     public class GroupHelper : HelperBase
