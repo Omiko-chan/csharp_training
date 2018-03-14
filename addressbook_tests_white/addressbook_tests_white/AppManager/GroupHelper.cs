@@ -25,6 +25,7 @@ namespace addressbook_tests_white
             }
         }
 
+        //удаление
         public void Remove(int p)
         {
             Window dialogue = OpenGroupsDialogue();
