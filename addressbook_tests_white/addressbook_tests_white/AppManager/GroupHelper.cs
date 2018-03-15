@@ -24,7 +24,7 @@ namespace addressbook_tests_white
             List<GroupData> groups = GetGroupList();
             if (groups.Count == 0)
             {
-                Add(groupData);
+                Add(groupData,0);
             }
         }
 
@@ -59,10 +59,35 @@ namespace addressbook_tests_white
             return list;
 
         }
+        public List<GroupData> GetGroupList(int level)
+        {
+            List<GroupData> list = new List<GroupData>();
+            Window dialogue = OpenGroupsDialogue();
+            Tree tree = dialogue.Get<Tree>("uxAddressTreeView");
+            TreeNode root = tree.Nodes[0].Nodes[level];
+            foreach (TreeNode item in root.Nodes)
+            {
+                list.Add(new GroupData()
+                {
+                    Name = item.Text
+                });
+            }
+            CloseGroupsDialogue(dialogue);
+            return list;
 
-        public void Add(GroupData newGroup)
+        }
+
+
+
+        public void Add(GroupData newGroup, int level)
         {
             Window dialogue = OpenGroupsDialogue();
+            if (level == 1)
+            {
+                Tree tree = dialogue.Get<Tree>("uxAddressTreeView");
+                TreeNode root = tree.Nodes[0];
+                root.Nodes[0].Select();
+            }
             dialogue.Get<Button>("uxNewAddressButton").Click();
             TextBox textBox=(TextBox) dialogue.Get(SearchCriteria.ByControlType(ControlType.Edit));
             textBox.Enter(newGroup.Name);
@@ -80,11 +105,11 @@ namespace addressbook_tests_white
 
         private Window OpenGroupsDialogue()
         {
-            Window win = manager.MainWindow.ModalWindow(GROUPWINTITLE);
-            if (win==null)
-            {
+            //List<Window> win = manager.MainWindow.ModalWindows();
+            //if (win.Count==0)
+            //{
                 manager.MainWindow.Get<Button>("groupButton").Click();
-            }
+            //}
             return manager.MainWindow.ModalWindow(GROUPWINTITLE);
         }
     }
