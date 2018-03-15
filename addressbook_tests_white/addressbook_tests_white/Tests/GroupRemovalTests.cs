@@ -11,7 +11,7 @@ namespace addressbook_tests_white
     public class GroupRemovalTests : TestBase
     {
         [SetUp]
-        public void PreconditionsGroupModification()
+        public void PreconditionsGroupRemoval()
         {
 
             GroupData groupData = new GroupData()

@@ -77,8 +77,6 @@ namespace addressbook_tests_white
 
         }
 
-
-
         public void Add(GroupData newGroup, int level)
         {
             Window dialogue = OpenGroupsDialogue();
