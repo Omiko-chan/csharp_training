@@ -16,6 +16,9 @@ namespace addressbook_tests_white
     {
         public static string GROUPWINTITLE = "Group editor";
 
+        public GroupHelper(ApplicationManager manager) : base(manager) { }
+
+
         public void PreconditionsGroup(GroupData groupData)
         {
             List<GroupData> groups = GetGroupList();
@@ -38,7 +41,6 @@ namespace addressbook_tests_white
 
         }
 
-        public GroupHelper(ApplicationManager manager) : base(manager) { }
 
         public List<GroupData> GetGroupList()
         {
@@ -78,7 +80,11 @@ namespace addressbook_tests_white
 
         private Window OpenGroupsDialogue()
         {
-            manager.MainWindow.Get<Button>("groupButton").Click();
+            Window win = manager.MainWindow.ModalWindow(GROUPWINTITLE);
+            if (win==null)
+            {
+                manager.MainWindow.Get<Button>("groupButton").Click();
+            }
             return manager.MainWindow.ModalWindow(GROUPWINTITLE);
         }
     }
