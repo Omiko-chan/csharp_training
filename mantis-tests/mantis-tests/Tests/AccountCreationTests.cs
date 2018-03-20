@@ -17,7 +17,7 @@ namespace mantis_tests
             Environment.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
             appManager.Ftp.BackupFile(@"/config_inc.php");
             using (Stream localFile = File.Open("config_inc.php",FileMode.Open))
-            { appManager.Ftp.Upload(@"/config_inc.php", null); }
+            { appManager.Ftp.Upload(@"/config_inc.php", localFile); }
         }
         [Test]
         public void TestAccountRegistration()
