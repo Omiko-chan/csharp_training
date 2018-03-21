@@ -14,13 +14,40 @@ namespace mantis_tests
 
         public void Register(AccountData account)
         {
-            OpenMainPage();
+            manager.navigationHelper.OpenMainPage();
             OpenRegistrationForm();
+            driver.Manage().Timeouts().ImplicitWait = new TimeSpan(20);
             FillRegistrationForm(account);
             SubmitRegistration();
             String url = GetConfirmationUrl(account);
-            FillPasswordForm(url);
+            FillPasswordForm(url, account);
             SubmitPasswordForm();
+
+        }
+
+        public void Login(AccountData loginAccount)
+        {
+            manager.navigationHelper.OpenMainPage();
+            driver.FindElement(By.Name("username")).SendKeys(loginAccount.Name);
+            driver.FindElement(By.CssSelector("input.btn")).Click();
+            driver.FindElement(By.Name("password")).SendKeys(loginAccount.Password);
+            driver.FindElement(By.CssSelector("input.btn")).Click();
+        }
+
+        public void DeleteAccount(int id)
+        {
+            manager.navigationHelper.OpenUserManagement();
+            driver.FindElement(By.XPath("//a[@href='manage_user_edit_page.php?user_id=" + id + "']")).Click();
+            driver.Manage().Timeouts().ImplicitWait = new TimeSpan(20);
+            driver.FindElement(By.XPath("//input[@value='Удалить учетную запись']")).Click();
+            driver.Manage().Timeouts().ImplicitWait = new TimeSpan(20);
+            driver.FindElement(By.XPath("//input[@value='Удалить учетную запись']")).Click();
+           
+        }
+
+        public void Logout()
+        {
+            manager.navigationHelper.OpenLogoutPage();
 
         }
 
@@ -32,14 +59,17 @@ namespace mantis_tests
 
         }
 
-        private void FillPasswordForm(string url)
+        private void FillPasswordForm(string url, AccountData account)
         {
-            throw new NotImplementedException();
+            driver.Url = url;
+            driver.FindElement(By.Name("password_confirm")).SendKeys(account.Password);
+            driver.FindElement(By.Name("password")).SendKeys(account.Password);
+
         }
 
         private void SubmitPasswordForm()
         {
-            throw new NotImplementedException();
+            driver.FindElement(By.CssSelector("button.btn")).Click();
         }
 
         private void OpenRegistrationForm()
@@ -56,11 +86,6 @@ namespace mantis_tests
         {
             driver.FindElement(By.Name("username")).SendKeys(account.Name);
             driver.FindElement(By.Name("email")).SendKeys(account.Email);
-        }
-
-        private void OpenMainPage()
-        {
-            manager.Driver.Url = "http://localhost/mantisbt-2.12.0/login_page.php";
         }
     }
 }

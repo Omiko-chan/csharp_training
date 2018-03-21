@@ -19,6 +19,7 @@ namespace mantis_tests
         public FtpHelper Ftp { get;  set; }
         public JamesHelper James { get;  set; }
         public MailHelper Mail { get;  set; }
+        public NavigationHelper navigationHelper { get; set; }
 
         private static ThreadLocal<ApplicationManager> app= new ThreadLocal<ApplicationManager>();
 
@@ -28,11 +29,12 @@ namespace mantis_tests
             options.UseLegacyImplementation = true;
             options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox ESR\firefox.exe";
             driver = new FirefoxDriver(options);
-            baseURL = "http://localhost/";
+            baseURL = "http://localhost/mantisbt-2.12.0";
             Registration = new RegistrationHelper(this);
             Ftp = new FtpHelper(this);
             James = new JamesHelper(this);
             Mail = new MailHelper(this);
+            navigationHelper = new NavigationHelper(this, baseURL);
         }
 
         ~ApplicationManager()

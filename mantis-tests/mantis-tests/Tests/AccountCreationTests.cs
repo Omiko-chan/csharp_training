@@ -24,10 +24,27 @@ namespace mantis_tests
         {
             AccountData account = new AccountData()
             {
-                Name="testuser1",
+                Name="testuser",
                 Password="password",
-                Email= "testuser1@localhost.localdomain"
+                Email= "testuser@localhost.localdomain"
             };
+            List<AccountData> accounts = AccountData.GetAll();
+            foreach (AccountData acc in accounts)
+            {
+                if (acc.Name == account.Name)
+                {
+                    AccountData loginAccount = new AccountData()
+                    {
+                        Name = "administrator",
+                        Password = "root"
+                    };
+                    int id = acc.Id;
+                    appManager.Registration.Login(loginAccount);
+                    appManager.Registration.DeleteAccount(id);
+                    appManager.Registration.Logout();
+
+                }
+            }
             appManager.James.Delete(account);
             appManager.James.Add(account);
             appManager.Registration.Register(account);
