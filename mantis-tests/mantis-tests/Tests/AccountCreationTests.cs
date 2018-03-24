@@ -39,9 +39,9 @@ namespace mantis_tests
                         Password = "root"
                     };
                     int id = acc.Id;
-                    appManager.Registration.Login(loginAccount);
-                    appManager.Registration.DeleteAccount(id);
-                    appManager.Registration.Logout();
+                    appManager.Auth.Login(loginAccount);
+                    appManager.Registration.Remove(id);
+                    appManager.Auth.Logout();
 
                 }
             }

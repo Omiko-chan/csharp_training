@@ -44,6 +44,7 @@ namespace mantis_tests
                 return;
             }
             GoToManagement();
+            driver.Manage().Timeouts().ImplicitWait = new TimeSpan(40);
             GoToProjectManagement();
         }
 
@@ -51,10 +52,6 @@ namespace mantis_tests
         {
             driver.FindElement(By.XPath("//a[@href='/mantisbt-2.12.0/manage_proj_page.php']")).Click();
         }
-        //public void GoToProjectManagement()
-        //{
-        //    driver.Url = baseURL + "/manage_proj_page.php";
-        //}
 
         public void GoToManagement()
         {

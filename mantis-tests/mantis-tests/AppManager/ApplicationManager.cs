@@ -23,6 +23,7 @@ namespace mantis_tests
         public ProjectHelper Project { get; set; }
 
         private static ThreadLocal<ApplicationManager> app= new ThreadLocal<ApplicationManager>();
+        protected LoginHelper loginHelper;
 
         private ApplicationManager()
         {
@@ -67,6 +68,13 @@ namespace mantis_tests
             get
             {
                 return driver;
+            }
+        }
+        public LoginHelper Auth
+        {
+            get
+            {
+                return loginHelper;
             }
         }
 

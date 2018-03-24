@@ -25,9 +25,9 @@ namespace mantis_tests
                         Password = "root"
                     };
                     int id = acc.Id;
-                    Login(loginAccount);
-                    DeleteAccount(id);
-                    Logout();
+                    manager.Auth.Login(loginAccount);
+                    Remove(id);
+                    manager.Auth.Logout();
 
                 }
             }
@@ -51,16 +51,7 @@ namespace mantis_tests
 
         }
 
-        public void Login(AccountData loginAccount)
-        {
-            manager.navigationHelper.OpenMainPage();
-            driver.FindElement(By.Name("username")).SendKeys(loginAccount.Name);
-            driver.FindElement(By.CssSelector("input.btn")).Click();
-            driver.FindElement(By.Name("password")).SendKeys(loginAccount.Password);
-            driver.FindElement(By.CssSelector("input.btn")).Click();
-        }
-
-        public void DeleteAccount(int id)
+        public void Remove(int id)
         {
             manager.navigationHelper.OpenUserManagement();
             driver.FindElement(By.XPath("//a[@href='manage_user_edit_page.php?user_id=" + id + "']")).Click();
@@ -69,12 +60,6 @@ namespace mantis_tests
             driver.Manage().Timeouts().ImplicitWait = new TimeSpan(20);
             driver.FindElement(By.XPath("//input[@value='Удалить учетную запись']")).Click();
            
-        }
-
-        public void Logout()
-        {
-            manager.navigationHelper.OpenLogoutPage();
-
         }
 
         private string GetConfirmationUrl(AccountData account)

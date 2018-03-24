@@ -9,7 +9,7 @@ using System.IO;
 namespace mantis_tests
 {
     [TestFixture]
-    public class ProjectCreationTests : TestBase
+    public class ProjectCreationTests : AuthTestBase
     {
         [OneTimeSetUp]
         public void setUpConfig()
@@ -19,19 +19,20 @@ namespace mantis_tests
             using (Stream localFile = File.Open("config_inc.php", FileMode.Open))
             { appManager.Ftp.Upload(@"/config_inc.php", localFile); }
         }
+
         [Test]
         public void TestProjectCreation()
         {
-            AccountData account = new AccountData()
-            {
-                Name = "administrator",
-                Password = "root",
-            };
+            //AccountData account = new AccountData()
+            //{
+            //    Name = "administrator",
+            //    Password = "root",
+            //};
             ProjectData project = new ProjectData()
             {
                 Name = "Newtestproject"
             };
-            appManager.Registration.Login(account);
+            //appManager.Registration.Login(account);
             appManager.navigationHelper.OpenProjectManagement();
             List<ProjectData> Projects = ProjectData.GetAll();
             foreach (ProjectData prj in Projects)
@@ -39,13 +40,14 @@ namespace mantis_tests
                 if (prj.Name == project.Name)
                 {
                     int id = prj.Id;
-                    appManager.Project.DeleteProject(id);
+                    appManager.Project.Remove(id);
+                    break;
                 }
             }
 
             List<ProjectData> oldProjects = ProjectData.GetAll();
 
-          //  appManager.Project.CreateNewProject(project);
+            appManager.Project.CreateNewProject(project);
 
             Assert.AreEqual(oldProjects.Count + 1, ProjectData.GetAll().Count);
             List<ProjectData> newProject = ProjectData.GetAll();
@@ -56,19 +58,48 @@ namespace mantis_tests
         }
 
         [Test]
-        public void Test()
+        public void TestProjectCreationDuplicateName()
         {
-            AccountData account = new AccountData()
+            //AccountData account = new AccountData()
+            //{
+            //    Name = "administrator",
+            //    Password = "root",
+            //};
+            ProjectData project = new ProjectData()
             {
-                Name = "administrator",
-                Password = "root",
+                Name = "Newtestproject"
             };
-            appManager.Registration.Login(account);
+            bool existPrj = false;
+            //appManager.Registration.Login(account);
             appManager.navigationHelper.OpenProjectManagement();
+            List<ProjectData> Projects = ProjectData.GetAll();
+            
+            foreach (ProjectData prj in Projects)
+            {
+                if (prj.Name == project.Name)
+                {
+                    int id = prj.Id;
+                    existPrj = true;
+                    break;
+                }
+            }
+            if(!existPrj)
+            { 
+                appManager.Project.CreateNewProject(project);
+            }
+            List<ProjectData> oldProjects = ProjectData.GetAll();
 
-            appManager.Project.CreateNewProject();
+            appManager.Project.CreateNewProject(project);
+
+            Assert.AreEqual(oldProjects.Count, ProjectData.GetAll().Count);
+            List<ProjectData> newProject = ProjectData.GetAll();
+            oldProjects.Sort();
+            newProject.Sort();
+            Assert.AreEqual(oldProjects, newProject);
+
+            Assert.IsFalse(!appManager.Project.CreateFail());
         }
-
+      
         [OneTimeTearDown]
         public void restoreConfig()
         {
