@@ -11,28 +11,13 @@ namespace mantis_tests
     [TestFixture]
     public class ProjectCreationTests : AuthTestBase
     {
-        [OneTimeSetUp]
-        public void setUpConfig()
-        {
-            Environment.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
-            appManager.Ftp.BackupFile(@"/config_inc.php");
-            using (Stream localFile = File.Open("config_inc.php", FileMode.Open))
-            { appManager.Ftp.Upload(@"/config_inc.php", localFile); }
-        }
-
         [Test]
         public void TestProjectCreation()
         {
-            //AccountData account = new AccountData()
-            //{
-            //    Name = "administrator",
-            //    Password = "root",
-            //};
             ProjectData project = new ProjectData()
             {
                 Name = "Newtestproject"
             };
-            //appManager.Registration.Login(account);
             appManager.navigationHelper.OpenProjectManagement();
             List<ProjectData> Projects = ProjectData.GetAll();
             foreach (ProjectData prj in Projects)

@@ -11,14 +11,6 @@ namespace mantis_tests
     [TestFixture]
     public class ProjectRemovalTests : AuthTestBase
     {
-        [OneTimeSetUp]
-        public void setUpConfig()
-        {
-            Environment.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
-            appManager.Ftp.BackupFile(@"/config_inc.php");
-            using (Stream localFile = File.Open("config_inc.php", FileMode.Open))
-            { appManager.Ftp.Upload(@"/config_inc.php", localFile); }
-        }
         [SetUp]
         public void PreconditionsRemoval()
         {
@@ -31,12 +23,6 @@ namespace mantis_tests
         [Test]
         public void ProjectRemovalTest()
         {
-            //AccountData account = new AccountData()
-            //{
-            //    Name = "administrator",
-            //    Password = "root",
-            //};
-            //appManager.Registration.Login(account);
             appManager.navigationHelper.OpenProjectManagement();
 
             List<ProjectData> oldProjects = ProjectData.GetAll();

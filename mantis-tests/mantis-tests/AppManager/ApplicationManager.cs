@@ -23,7 +23,7 @@ namespace mantis_tests
         public ProjectHelper Project { get; set; }
 
         private static ThreadLocal<ApplicationManager> app= new ThreadLocal<ApplicationManager>();
-        protected LoginHelper loginHelper;
+        public LoginHelper loginHelper;
 
         private ApplicationManager()
         {
@@ -38,6 +38,7 @@ namespace mantis_tests
             Mail = new MailHelper(this);
             navigationHelper = new NavigationHelper(this, baseURL);
             Project = new ProjectHelper(this);
+            loginHelper = new LoginHelper(this);
         }
 
         ~ApplicationManager()
