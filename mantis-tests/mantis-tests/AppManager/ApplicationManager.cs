@@ -20,6 +20,7 @@ namespace mantis_tests
         public JamesHelper James { get;  set; }
         public MailHelper Mail { get;  set; }
         public NavigationHelper navigationHelper { get; set; }
+        public ProjectHelper Project { get; set; }
 
         private static ThreadLocal<ApplicationManager> app= new ThreadLocal<ApplicationManager>();
 
@@ -35,6 +36,7 @@ namespace mantis_tests
             James = new JamesHelper(this);
             Mail = new MailHelper(this);
             navigationHelper = new NavigationHelper(this, baseURL);
+            Project = new ProjectHelper(this);
         }
 
         ~ApplicationManager()

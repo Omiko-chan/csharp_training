@@ -12,6 +12,32 @@ namespace mantis_tests
     {
         public RegistrationHelper(ApplicationManager manager) : base(manager) { }
 
+        public void CreateNewAccount(AccountData account)
+        {
+            List<AccountData> accounts = AccountData.GetAll();
+            foreach (AccountData acc in accounts)
+            {
+                if (acc.Name == account.Name)
+                {
+                    AccountData loginAccount = new AccountData()
+                    {
+                        Name = "administrator",
+                        Password = "root"
+                    };
+                    int id = acc.Id;
+                    Login(loginAccount);
+                    DeleteAccount(id);
+                    Logout();
+
+                }
+            }
+
+            manager.James.Delete(account);
+            manager.James.Add(account);
+            manager.Registration.Register(account);
+        }
+
+
         public void Register(AccountData account)
         {
             manager.navigationHelper.OpenMainPage();

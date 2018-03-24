@@ -37,6 +37,30 @@ namespace mantis_tests
             driver.Url = baseURL + "/manage_user_page.php";
         }
 
+        public void OpenProjectManagement()
+        {
+            if (driver.Url == baseURL + "/manage_proj_page.php")
+            {
+                return;
+            }
+            GoToManagement();
+            GoToProjectManagement();
+        }
+
+        public void GoToProjectManagement()
+        {
+            driver.FindElement(By.XPath("//a[@href='/mantisbt-2.12.0/manage_proj_page.php']")).Click();
+        }
+        //public void GoToProjectManagement()
+        //{
+        //    driver.Url = baseURL + "/manage_proj_page.php";
+        //}
+
+        public void GoToManagement()
+        {
+            driver.FindElement(By.XPath("//a[@href='/mantisbt-2.12.0/manage_overview_page.php']")).Click();
+        }
+
         public void OpenLogoutPage()
         {
             driver.Url = baseURL + "/logout_page.php";
