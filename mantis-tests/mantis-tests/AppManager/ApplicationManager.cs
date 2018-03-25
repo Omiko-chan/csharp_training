@@ -14,6 +14,7 @@ namespace mantis_tests
     {
         protected IWebDriver driver;
         protected string baseURL;
+        private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
         public RegistrationHelper Registration { get; set; }
         public FtpHelper Ftp { get;  set; }
@@ -21,9 +22,8 @@ namespace mantis_tests
         public MailHelper Mail { get;  set; }
         public NavigationHelper navigationHelper { get; set; }
         public ProjectHelper Project { get; set; }
-
-        private static ThreadLocal<ApplicationManager> app= new ThreadLocal<ApplicationManager>();
         public LoginHelper loginHelper;
+        public AdminHelper Admin { get; set; }
 
         private ApplicationManager()
         {
@@ -39,6 +39,7 @@ namespace mantis_tests
             navigationHelper = new NavigationHelper(this, baseURL);
             Project = new ProjectHelper(this);
             loginHelper = new LoginHelper(this);
+            Admin = new AdminHelper(this, baseURL);
         }
 
         ~ApplicationManager()
@@ -58,7 +59,7 @@ namespace mantis_tests
             if (!app.IsValueCreated)
             {
                 ApplicationManager newInstance = new ApplicationManager();
-                newInstance.driver.Url = "http://localhost/mantisbt-2.12.0/login_page.php";
+                newInstance.driver.Url = newInstance.baseURL + "/login_page.php";
                 app.Value = newInstance;
             }
             return app.Value;

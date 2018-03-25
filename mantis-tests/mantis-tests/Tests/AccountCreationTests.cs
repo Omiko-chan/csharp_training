@@ -29,23 +29,32 @@ namespace mantis_tests
                 Password="password",
                 Email= "testuser@localhost.localdomain"
             };
-            List<AccountData> accounts = AccountData.GetAll();
-            foreach (AccountData acc in accounts)
-            {
-                if (acc.Name == account.Name)
-                {
-                    AccountData loginAccount = new AccountData()
-                    {
-                        Name = "administrator",
-                        Password = "root"
-                    };
-                    int id = acc.Id;
-                    appManager.Auth.Login(loginAccount);
-                    appManager.Registration.Remove(id);
-                    appManager.Auth.Logout();
+            //выбор данных из БД
+            //List<AccountData> accounts = AccountData.GetAll();
+            //foreach (AccountData acc in accounts)
+            //{
+            //    if (acc.Name == account.Name)
+            //    {
+            //        AccountData loginAccount = new AccountData()
+            //        {
+            //            Name = "administrator",
+            //            Password = "root"
+            //        };
+            //        int id = acc.Id;
+            //        appManager.Auth.Login(loginAccount);
+            //        appManager.Registration.Remove(id);
+            //        appManager.Auth.Logout();
 
-                }
+            //    }
+            //}
+            //выбор данных через облегченный браузер
+            List<AccountData> accounts = appManager.Admin.GetAllAccounts();
+            AccountData existingAccount = accounts.Find(x => x.Name == account.Name);
+            if (existingAccount != null)
+            {
+                appManager.Admin.DeleteAccount(existingAccount);
             }
+
             appManager.James.Delete(account);
             appManager.James.Add(account);
             appManager.Registration.Register(account);
