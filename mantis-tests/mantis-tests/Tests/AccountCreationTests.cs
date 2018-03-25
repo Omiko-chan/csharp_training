@@ -21,7 +21,7 @@ namespace mantis_tests
         }
 
         [Test]
-        public void TestAccountRegistration()
+        public void TestAccountRegistrationSearchFromDB()
         {
             AccountData account = new AccountData()
             {
@@ -29,25 +29,37 @@ namespace mantis_tests
                 Password="password",
                 Email= "testuser@localhost.localdomain"
             };
-            //выбор данных из БД
-            //List<AccountData> accounts = AccountData.GetAll();
-            //foreach (AccountData acc in accounts)
-            //{
-            //    if (acc.Name == account.Name)
-            //    {
-            //        AccountData loginAccount = new AccountData()
-            //        {
-            //            Name = "administrator",
-            //            Password = "root"
-            //        };
-            //        int id = acc.Id;
-            //        appManager.Auth.Login(loginAccount);
-            //        appManager.Registration.Remove(id);
-            //        appManager.Auth.Logout();
+            List<AccountData> accounts = AccountData.GetAll();
+            foreach (AccountData acc in accounts)
+            {
+                if (acc.Name == account.Name)
+                {
+                    AccountData loginAccount = new AccountData()
+                    {
+                        Name = "administrator",
+                        Password = "root"
+                    };
+                    int id = acc.Id;
+                    appManager.Auth.Login(loginAccount);
+                    appManager.Registration.Remove(id);
+                    appManager.Auth.Logout();
 
-            //    }
-            //}
-            //выбор данных через облегченный браузер
+                }
+            }
+            appManager.James.Delete(account);
+            appManager.James.Add(account);
+            appManager.Registration.Register(account);
+        }
+
+        [Test]
+        public void TestAccountRegistrationSearchFromSimpleBrowser()
+        {
+            AccountData account = new AccountData()
+            {
+                Name = "testuser",
+                Password = "password",
+                Email = "testuser@localhost.localdomain"
+            };
             List<AccountData> accounts = appManager.Admin.GetAllAccounts();
             AccountData existingAccount = accounts.Find(x => x.Name == account.Name);
             if (existingAccount != null)
@@ -59,6 +71,7 @@ namespace mantis_tests
             appManager.James.Add(account);
             appManager.Registration.Register(account);
         }
+
 
         [OneTimeTearDown]
         public void restoreConfig()
