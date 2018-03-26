@@ -29,6 +29,16 @@ namespace mantis_tests
             driver.FindElement(By.XPath("//input[@value='Добавить проект']")).Click();
         }
 
+        public List<ProjectData> GetAllProject()
+        { 
+            return  ProjectData.GetAll();
+        }
+
+        public List<ProjectData> GetAllProject(AccountData account)
+        {
+            return manager.API.GetAllProject(account);
+        }
+        
         public void PreconditionsProject(ProjectData projectData)
         {
             if (!IsProjectIn())
@@ -38,6 +48,15 @@ namespace mantis_tests
            
         }
 
+        public void PreconditionsProject(AccountData account,ProjectData projectData)
+        {
+            if (!IsProjectIn())
+            {
+                manager.API.CreateNewProject(account,projectData);
+            }
+
+        }
+        
         public bool IsProjectIn()
         {
             return ProjectData.GetAll().Count > 0;

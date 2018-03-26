@@ -18,10 +18,15 @@ namespace mantis_tests
             {
                 Name="Preconditionsproject"
             };
-            appManager.Project.PreconditionsProject(projectData);
+            AccountData account = new AccountData()
+            {
+                Name = "administrator",
+                Password = "root"
+            };
+            appManager.Project.PreconditionsProject(account,projectData);
         }
         [Test]
-        public void ProjectRemovalTest()
+        public void TestProjectRemoval()
         {
             appManager.navigationHelper.OpenProjectManagement();
 

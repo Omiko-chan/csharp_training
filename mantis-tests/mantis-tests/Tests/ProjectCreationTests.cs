@@ -18,8 +18,13 @@ namespace mantis_tests
             {
                 Name = "Newtestproject"
             };
+            AccountData account = new AccountData()
+            {
+                Name = "administrator",
+                Password = "root"
+            };
             appManager.navigationHelper.OpenProjectManagement();
-            List<ProjectData> Projects = ProjectData.GetAll();
+            List<ProjectData> Projects = appManager.Project.GetAllProject(account);
             foreach (ProjectData prj in Projects)
             {
                 if (prj.Name == project.Name)
@@ -29,13 +34,13 @@ namespace mantis_tests
                     break;
                 }
             }
-
-            List<ProjectData> oldProjects = ProjectData.GetAll();
+            
+            List<ProjectData> oldProjects = appManager.Project.GetAllProject(account);
 
             appManager.Project.CreateNewProject(project);
 
-            Assert.AreEqual(oldProjects.Count + 1, ProjectData.GetAll().Count);
-            List<ProjectData> newProject = ProjectData.GetAll();
+            Assert.AreEqual(oldProjects.Count + 1, appManager.Project.GetAllProject(account).Count);
+            List<ProjectData> newProject = appManager.Project.GetAllProject(account);
             oldProjects.Add(project);
             oldProjects.Sort();
             newProject.Sort();
@@ -45,19 +50,18 @@ namespace mantis_tests
         [Test]
         public void TestProjectCreationDuplicateName()
         {
-            //AccountData account = new AccountData()
-            //{
-            //    Name = "administrator",
-            //    Password = "root",
-            //};
             ProjectData project = new ProjectData()
             {
                 Name = "Newtestproject"
             };
+            AccountData account = new AccountData()
+            {
+                Name = "administrator",
+                Password = "root"
+            };
             bool existPrj = false;
-            //appManager.Registration.Login(account);
             appManager.navigationHelper.OpenProjectManagement();
-            List<ProjectData> Projects = ProjectData.GetAll();
+            List<ProjectData> Projects = appManager.Project.GetAllProject(account);
             
             foreach (ProjectData prj in Projects)
             {
@@ -72,19 +76,20 @@ namespace mantis_tests
             { 
                 appManager.Project.CreateNewProject(project);
             }
-            List<ProjectData> oldProjects = ProjectData.GetAll();
+            List<ProjectData> oldProjects = appManager.Project.GetAllProject(account);
 
             appManager.Project.CreateNewProject(project);
 
-            Assert.AreEqual(oldProjects.Count, ProjectData.GetAll().Count);
-            List<ProjectData> newProject = ProjectData.GetAll();
+            Assert.AreEqual(oldProjects.Count, appManager.Project.GetAllProject(account).Count);
+            List<ProjectData> newProject = appManager.Project.GetAllProject(account);
             oldProjects.Sort();
             newProject.Sort();
             Assert.AreEqual(oldProjects, newProject);
 
             Assert.IsFalse(!appManager.Project.CreateFail());
         }
-      
+
+              
         [OneTimeTearDown]
         public void restoreConfig()
         {
