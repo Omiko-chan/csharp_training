@@ -11,17 +11,17 @@ namespace mantis_tests
     [TestFixture]
     public class ProjectRemovalTests : AuthTestBase
     {
+        AccountData account = new AccountData()
+        {
+            Name = "administrator",
+            Password = "root"
+        };
         [SetUp]
         public void PreconditionsRemoval()
         {
             ProjectData projectData = new ProjectData()
             {
                 Name="Preconditionsproject"
-            };
-            AccountData account = new AccountData()
-            {
-                Name = "administrator",
-                Password = "root"
             };
             appManager.Project.PreconditionsProject(account,projectData);
         }
@@ -30,14 +30,14 @@ namespace mantis_tests
         {
             appManager.navigationHelper.OpenProjectManagement();
 
-            List<ProjectData> oldProjects = ProjectData.GetAll();
+            List<ProjectData> oldProjects = appManager.Project.GetAllProject(account);
             ProjectData toBeRemoved = oldProjects[0];
 
             appManager.Project.Remove(toBeRemoved.Id);
 
-            Assert.AreEqual(oldProjects.Count - 1, ProjectData.GetAll().Count);
+            Assert.AreEqual(oldProjects.Count - 1, appManager.Project.GetAllProject(account).Count);
 
-            List<ProjectData> newProjects = ProjectData.GetAll();
+            List<ProjectData> newProjects = appManager.Project.GetAllProject(account);
             oldProjects.RemoveAt(0);
             Assert.AreEqual(oldProjects, newProjects);
             foreach (ProjectData group in newProjects)
